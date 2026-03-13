@@ -1,0 +1,17 @@
+{
+  "name": "child-family-development-support",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prepare": "husky",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
+    "lint": "pnpm --filter frontend lint && pnpm --filter backend lint",
+    "typecheck": "pnpm --filter frontend typecheck && pnpm --filter backend typecheck",
+    "test": "pnpm --filter backend test",
+    "build": "pnpm --filter frontend build && pnpm --filter backend build"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
