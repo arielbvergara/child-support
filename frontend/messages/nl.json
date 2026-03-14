@@ -147,9 +147,11 @@
       "message": "Uw bericht",
       "messagePlaceholder": "Vertel me kort over uw situatie of vraag...",
       "submit": "Bericht versturen",
+      "submitting": "Versturen...",
       "privacy": "Uw gegevens worden vertrouwelijk behandeld en nooit gedeeld met derden.",
       "successTitle": "Bericht ontvangen!",
-      "successMessage": "Bedankt voor uw bericht. Ik neem zo snel mogelijk contact met u op."
+      "successMessage": "Bedankt voor uw bericht. Ik neem zo snel mogelijk contact met u op.",
+      "errorMessage": "Er is een fout opgetreden. Probeer het opnieuw of neem direct contact op."
     }
   },
   "footer": {

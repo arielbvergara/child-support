@@ -5,16 +5,28 @@ import { useTranslations } from 'next-intl';
 import { Button } from './Button';
 import { CheckCircle } from 'lucide-react';
 
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+const INITIAL_FORM_DATA: FormData = {
+  name: '',
+  email: '',
+  phone: '',
+  service: '',
+  message: '',
+};
+
 export function ContactForm() {
   const t = useTranslations('contact.form');
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
 
   function handleChange(
     e: React.ChangeEvent<
@@ -24,10 +36,30 @@ export function ContactForm() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // MVP: static shell — no submission logic yet
-    setSubmitted(true);
+    setIsLoading(true);
+    setHasError(false);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        setHasError(true);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   if (submitted) {
@@ -153,11 +185,23 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" variant="primary" size="md" className="w-full sm:w-auto">
-          {t('submit')}
+        <Button
+          type="submit"
+          variant="primary"
+          size="md"
+          className="w-full sm:w-auto"
+          disabled={isLoading}
+        >
+          {isLoading ? t('submitting') : t('submit')}
         </Button>
         <p className="text-xs text-warm-500">{t('privacy')}</p>
       </div>
+
+      {hasError && (
+        <p role="alert" className="text-sm text-red-600">
+          {t('errorMessage')}
+        </p>
+      )}
     </form>
   );
 }

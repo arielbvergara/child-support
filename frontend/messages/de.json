@@ -147,9 +147,11 @@
       "message": "Ihre Nachricht",
       "messagePlaceholder": "Erzählen Sie mir kurz von Ihrer Situation oder Ihrer Frage...",
       "submit": "Nachricht senden",
+      "submitting": "Senden...",
       "privacy": "Ihre Daten werden vertraulich behandelt und niemals an Dritte weitergegeben.",
       "successTitle": "Nachricht erhalten!",
-      "successMessage": "Vielen Dank für Ihre Nachricht. Ich melde mich so bald wie möglich bei Ihnen."
+      "successMessage": "Vielen Dank für Ihre Nachricht. Ich melde mich so bald wie möglich bei Ihnen.",
+      "errorMessage": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt."
     }
   },
   "footer": {
