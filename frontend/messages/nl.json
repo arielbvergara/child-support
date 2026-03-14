@@ -1,0 +1,224 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Diensten",
+    "about": "Over mij",
+    "contact": "Contact",
+    "bookConsultation": "Maak een afspraak"
+  },
+  "hero": {
+    "headline": "Groei begeleiden, één gezin tegelijk",
+    "subheadline": "Professionele pedagogische ondersteuning voor kinderen en gezinnen die het beste willen voor hun kinderen.",
+    "ctaPrimary": "Maak een afspraak",
+    "ctaSecondary": "Bekijk de diensten",
+    "onlineBadge": "Online",
+    "inPersonBadge": "Persoonlijk",
+    "trust1": "✓ Gratis kennismakingsgesprek",
+    "trust2": "✓ BIG-geregistreerd",
+    "trust3": "✓ Online & persoonlijk"
+  },
+  "services": {
+    "sectionTitle": "Hoe ik kan helpen",
+    "sectionSubtitle": "Persoonlijke begeleiding afgestemd op de behoeften van uw kind en gezin.",
+    "learnMore": "Meer informatie",
+    "individual": {
+      "title": "Individueel consult",
+      "description": "Persoonlijke één-op-één sessies met ouders of gezinnen, online of persoonlijk. Gericht op uw specifieke vragen en uitdagingen."
+    },
+    "workshops": {
+      "title": "Groepsworkshops",
+      "description": "Interactieve workshops over opvoeding, ontwikkeling en gezinsrelaties. In kleine groepen voor optimale betrokkenheid."
+    },
+    "assessment": {
+      "title": "Kinderbeoordeling",
+      "description": "Professionele ontwikkelingsbeoordelingen voor kinderen. Inzicht in sterktes en aandachtspunten voor gerichte ondersteuning."
+    },
+    "school": {
+      "title": "School- en leerkrachtbegeleiding",
+      "description": "Ondersteuning voor scholen, leerkrachten en educatieve instellingen bij pedagogische vraagstukken en klassenmanagement."
+    }
+  },
+  "trust": {
+    "years": {
+      "value": "10+",
+      "label": "Jaar ervaring"
+    },
+    "families": {
+      "value": "200+",
+      "label": "Gezinnen begeleid"
+    },
+    "certified": {
+      "value": "BIG",
+      "label": "Geregistreerd"
+    },
+    "sectionTitle": "Vertrouwd door gezinnen",
+    "sectionSubtitle": "Wat ouders zeggen over de begeleiding"
+  },
+  "testimonials": {
+    "1": {
+      "quote": "De begeleiding heeft ons gezin echt geholpen. We begrijpen onze dochter nu veel beter en de communicatie thuis is enorm verbeterd.",
+      "author": "Marieke V.",
+      "role": "Moeder van twee kinderen"
+    },
+    "2": {
+      "quote": "Professioneel, warm en altijd beschikbaar voor vragen. De workshop over grenzen stellen was een eye-opener voor ons.",
+      "author": "Thomas & Lena B.",
+      "role": "Ouders"
+    }
+  },
+  "aboutTeaser": {
+    "sectionTitle": "Maak kennis met uw pedagoog",
+    "bio": "Met meer dan tien jaar ervaring in de pedagogische begeleiding help ik kinderen en gezinnen bij hun ontwikkeling. Mijn aanpak is warm, praktisch en altijd afgestemd op uw unieke situatie.",
+    "credentials": ["M.Ed. Pedagogische Wetenschappen", "BIG-geregistreerd", "10+ jaar ervaring"],
+    "linkText": "Meer over mij"
+  },
+  "cta": {
+    "headline": "Klaar voor de eerste stap?",
+    "subheadline": "Neem vandaag contact op voor een vrijblijvend kennismakingsgesprek.",
+    "button": "Neem contact op"
+  },
+  "about": {
+    "pageTitle": "Over mij",
+    "biography": {
+      "title": "Mijn verhaal",
+      "paragraph1": "Als pedagoog en gezinsbegeleidster draag ik al meer dan tien jaar bij aan de ontwikkeling van kinderen en de kracht van gezinnen. Mijn passie voor dit werk begon tijdens mijn studie Pedagogische Wetenschappen aan de Universiteit van Amsterdam, waar ik me specialiseerde in kind- en gezinspsychologie.",
+      "paragraph2": "Sindsdien heb ik honderden gezinnen begeleid bij uiteenlopende uitdagingen: van gedragsvraagstukken en ontwikkelingsachterstanden tot schoolproblemen en gezinsdynamieken. Ik geloof sterk in de kracht van elke familie en werk vanuit een positieve, oplossingsgerichte benadering.",
+      "pullQuote": "Elk kind heeft zijn eigen tempo. Mijn rol is om dat tempo te respecteren en het kind te ondersteunen bij elke stap."
+    },
+    "qualifications": {
+      "title": "Kwalificaties & Opleiding"
+    },
+    "credentials": {
+      "1": "Master Pedagogische Wetenschappen (M.Ed.)",
+      "2": "Postdoctoraal certificaat Gezinstherapie",
+      "3": "Opleiding Ontwikkelingspsychologie Kinderen",
+      "4": "NIP-geregistreerd pedagoog"
+    },
+    "philosophy": {
+      "title": "Mijn aanpak",
+      "subtitle": "Drie kernprincipes die mijn werk met kinderen en gezinnen bepalen",
+      "pillar1": {
+        "title": "Kind-gestuurd",
+        "description": "Het kind staat centraal. Ik sluit aan bij de behoeften, het tempo en de sterktes van ieder individueel kind."
+      },
+      "pillar2": {
+        "title": "Gezinsgericht",
+        "description": "Ouders en verzorgers zijn de experts op hun eigen kind. Ik werk samen met het hele gezin als systeem."
+      },
+      "pillar3": {
+        "title": "Evidencebased",
+        "description": "Mijn aanpak is gebaseerd op actueel wetenschappelijk onderzoek en bewezen effectieve methoden."
+      }
+    },
+    "ctaTitle": "Wil je meer weten?",
+    "ctaText": "Neem gerust contact op voor een vrijblijvend kennismakingsgesprek.",
+    "ctaButton": "Neem contact op"
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "pageSubtitle": "Stel uw vraag of maak een afspraak",
+    "info": {
+      "title": "Contactgegevens",
+      "responseTime": "Reactie binnen 24 uur op werkdagen"
+    },
+    "hours": {
+      "title": "Openingstijden",
+      "weekdays": "Maandag – Vrijdag",
+      "saturday": "Zaterdag",
+      "sunday": "Zondag"
+    },
+    "form": {
+      "title": "Stuur een bericht",
+      "name": "Volledige naam",
+      "namePlaceholder": "Uw naam",
+      "email": "E-mailadres",
+      "emailPlaceholder": "uw@email.nl",
+      "phone": "Telefoonnummer (optioneel)",
+      "phonePlaceholder": "+31 6 12345678",
+      "service": "Ik ben geïnteresseerd in",
+      "serviceDefault": "Selecteer een dienst",
+      "serviceOptions": {
+        "individual": "Individueel consult",
+        "workshops": "Groepsworkshop",
+        "assessment": "Kinderbeoordeling",
+        "school": "School- en leerkrachtbegeleiding",
+        "other": "Anders / algemene vraag"
+      },
+      "message": "Uw bericht",
+      "messagePlaceholder": "Vertel me kort over uw situatie of vraag...",
+      "submit": "Bericht versturen",
+      "privacy": "Uw gegevens worden vertrouwelijk behandeld en nooit gedeeld met derden.",
+      "successTitle": "Bericht ontvangen!",
+      "successMessage": "Bedankt voor uw bericht. Ik neem zo snel mogelijk contact met u op."
+    }
+  },
+  "footer": {
+    "tagline": "Professionele pedagogische begeleiding voor kinderen en gezinnen.",
+    "navigation": "Navigatie",
+    "legal": "Juridisch",
+    "privacyPolicy": "Privacybeleid",
+    "termsOfService": "Algemene Voorwaarden",
+    "copyright": "Alle rechten voorbehouden."
+  },
+  "privacy": {
+    "pageTitle": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: januari 2025",
+    "intro": "Uw privacy is voor ons van groot belang. In dit privacybeleid leggen wij uit welke persoonsgegevens wij verzamelen, waarom wij deze gegevens gebruiken en hoe wij hiermee omgaan.",
+    "sections": {
+      "collection": {
+        "title": "Welke gegevens verzamelen wij?",
+        "content": "Wij verzamelen persoonsgegevens die u actief aan ons verstrekt, zoals uw naam, e-mailadres en telefoonnummer via het contactformulier. Wij verzamelen geen gegevens via cookies of trackingtechnologieën."
+      },
+      "use": {
+        "title": "Waarvoor gebruiken wij uw gegevens?",
+        "content": "Uw gegevens worden uitsluitend gebruikt om contact met u op te nemen naar aanleiding van uw bericht of afspraakverzoek. Wij verkopen of delen uw gegevens nooit met derden."
+      },
+      "storage": {
+        "title": "Hoe lang bewaren wij uw gegevens?",
+        "content": "Wij bewaren uw persoonsgegevens niet langer dan noodzakelijk voor het doel waarvoor zij zijn verstrekt, met een maximum van twee jaar."
+      },
+      "rights": {
+        "title": "Uw rechten",
+        "content": "U heeft het recht uw persoonsgegevens in te zien, te corrigeren of te laten verwijderen. Neem hiervoor contact op via het contactformulier."
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "Voor vragen over dit privacybeleid kunt u contact opnemen via info@pedagogischadvies.nl."
+      }
+    }
+  },
+  "terms": {
+    "pageTitle": "Algemene Voorwaarden",
+    "lastUpdated": "Laatst bijgewerkt: januari 2025",
+    "intro": "Deze algemene voorwaarden zijn van toepassing op alle diensten die worden aangeboden via deze website.",
+    "sections": {
+      "services": {
+        "title": "Diensten",
+        "content": "Wij bieden pedagogische begeleiding en advies aan voor kinderen en gezinnen. De specifieke inhoud en duur van de dienstverlening worden in overleg vastgesteld."
+      },
+      "payment": {
+        "title": "Betaling",
+        "content": "Betalingsafspraken worden voorafgaand aan de dienstverlening schriftelijk bevestigd. Facturen dienen binnen 14 dagen na factuurdatum te worden voldaan."
+      },
+      "cancellation": {
+        "title": "Annulering",
+        "content": "Afspraken kunnen tot 24 uur van tevoren kosteloos worden geannuleerd. Bij latere annulering wordt 50% van het afgesproken tarief in rekening gebracht."
+      },
+      "liability": {
+        "title": "Aansprakelijkheid",
+        "content": "Wij zijn niet aansprakelijk voor indirecte schade die voortvloeit uit het gebruik van onze diensten. Onze aansprakelijkheid is beperkt tot het bedrag van de geleverde dienst."
+      },
+      "disputes": {
+        "title": "Geschillen",
+        "content": "Op deze voorwaarden is Nederlands recht van toepassing. Geschillen worden bij voorkeur in overleg opgelost."
+      }
+    }
+  },
+  "common": {
+    "online": "Online",
+    "inPerson": "Persoonlijk",
+    "learnMore": "Meer informatie",
+    "backToHome": "Terug naar home",
+    "skipToContent": "Sla over naar hoofdinhoud"
+  }
+}

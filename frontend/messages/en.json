@@ -1,0 +1,224 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "bookConsultation": "Book a Consultation"
+  },
+  "hero": {
+    "headline": "Nurturing Growth, One Family at a Time",
+    "subheadline": "Personalized child development support for families who want the best for their children.",
+    "ctaPrimary": "Book a Consultation",
+    "ctaSecondary": "Explore Services",
+    "onlineBadge": "Online",
+    "inPersonBadge": "In Person",
+    "trust1": "✓ Free introductory call",
+    "trust2": "✓ Certified professional",
+    "trust3": "✓ Online & in person"
+  },
+  "services": {
+    "sectionTitle": "How I Can Help",
+    "sectionSubtitle": "Tailored support designed around the unique needs of your child and family.",
+    "learnMore": "Learn more",
+    "individual": {
+      "title": "Individual Consultation",
+      "description": "One-on-one sessions with parents or families, online or in person. Focused on your specific questions and challenges."
+    },
+    "workshops": {
+      "title": "Group Workshops",
+      "description": "Interactive workshops on parenting, child development, and family dynamics. Small groups for optimal engagement."
+    },
+    "assessment": {
+      "title": "Child Assessment",
+      "description": "Professional developmental assessments for children. Insights into strengths and areas for targeted support."
+    },
+    "school": {
+      "title": "School & Educator Support",
+      "description": "Support for schools, teachers, and educational institutions on pedagogical challenges and classroom management."
+    }
+  },
+  "trust": {
+    "years": {
+      "value": "10+",
+      "label": "Years of Experience"
+    },
+    "families": {
+      "value": "200+",
+      "label": "Families Supported"
+    },
+    "certified": {
+      "value": "Certified",
+      "label": "Professional"
+    },
+    "sectionTitle": "Trusted by Families",
+    "sectionSubtitle": "What parents say about the support"
+  },
+  "testimonials": {
+    "1": {
+      "quote": "The support truly helped our family. We understand our daughter so much better now, and communication at home has improved enormously.",
+      "author": "Marieke V.",
+      "role": "Mother of two"
+    },
+    "2": {
+      "quote": "Professional, warm, and always available for questions. The workshop on setting boundaries was an eye-opener for us.",
+      "author": "Thomas & Lena B.",
+      "role": "Parents"
+    }
+  },
+  "aboutTeaser": {
+    "sectionTitle": "Meet Your Pedagogy Professional",
+    "bio": "With over ten years of experience in pedagogical guidance, I help children and families with their development. My approach is warm, practical, and always tailored to your unique situation.",
+    "credentials": ["M.Ed. Pedagogical Sciences", "Certified Professional", "10+ years experience"],
+    "linkText": "Learn my story"
+  },
+  "cta": {
+    "headline": "Ready to Take the First Step?",
+    "subheadline": "Get in touch today for a free introductory conversation.",
+    "button": "Get in Touch"
+  },
+  "about": {
+    "pageTitle": "About Me",
+    "biography": {
+      "title": "My Story",
+      "paragraph1": "As a pedagogue and family counselor, I have contributed to the development of children and the strength of families for over ten years. My passion for this work began during my studies in Pedagogical Sciences, where I specialized in child and family psychology.",
+      "paragraph2": "Since then, I have guided hundreds of families through diverse challenges: from behavioral issues and developmental delays to school difficulties and family dynamics. I strongly believe in the strength of every family and work from a positive, solution-oriented approach.",
+      "pullQuote": "Every child has their own pace. My role is to respect that pace and support the child at every step."
+    },
+    "qualifications": {
+      "title": "Qualifications & Training"
+    },
+    "credentials": {
+      "1": "Master of Pedagogical Sciences (M.Ed.)",
+      "2": "Postgraduate Certificate in Family Therapy",
+      "3": "Child Developmental Psychology Training",
+      "4": "Registered Pedagogue"
+    },
+    "philosophy": {
+      "title": "My Approach",
+      "subtitle": "Three core principles that define my work with children and families",
+      "pillar1": {
+        "title": "Child-Led",
+        "description": "The child is at the center. I connect with the needs, pace, and strengths of each individual child."
+      },
+      "pillar2": {
+        "title": "Family-Centered",
+        "description": "Parents and caregivers are the experts on their own child. I work with the whole family as a system."
+      },
+      "pillar3": {
+        "title": "Evidence-Based",
+        "description": "My approach is grounded in current scientific research and proven effective methods."
+      }
+    },
+    "ctaTitle": "Want to Know More?",
+    "ctaText": "Feel free to reach out for a free introductory conversation.",
+    "ctaButton": "Get in Touch"
+  },
+  "contact": {
+    "pageTitle": "Contact",
+    "pageSubtitle": "Ask a question or book an appointment",
+    "info": {
+      "title": "Contact Details",
+      "responseTime": "Response within 24 hours on business days"
+    },
+    "hours": {
+      "title": "Office Hours",
+      "weekdays": "Monday – Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "form": {
+      "title": "Send a Message",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email address",
+      "emailPlaceholder": "you@email.com",
+      "phone": "Phone number (optional)",
+      "phonePlaceholder": "+44 7700 900000",
+      "service": "I'm interested in",
+      "serviceDefault": "Select a service",
+      "serviceOptions": {
+        "individual": "Individual consultation",
+        "workshops": "Group workshop",
+        "assessment": "Child assessment",
+        "school": "School & educator support",
+        "other": "Other / general enquiry"
+      },
+      "message": "Your message",
+      "messagePlaceholder": "Tell me briefly about your situation or question...",
+      "submit": "Send Message",
+      "privacy": "Your details are treated confidentially and never shared with third parties.",
+      "successTitle": "Message received!",
+      "successMessage": "Thank you for your message. I will get back to you as soon as possible."
+    }
+  },
+  "footer": {
+    "tagline": "Professional pedagogical guidance for children and families.",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "copyright": "All rights reserved."
+  },
+  "privacy": {
+    "pageTitle": "Privacy Policy",
+    "lastUpdated": "Last updated: January 2025",
+    "intro": "Your privacy is important to us. This privacy policy explains what personal data we collect, why we use it, and how we handle it.",
+    "sections": {
+      "collection": {
+        "title": "What data do we collect?",
+        "content": "We collect personal data that you actively provide to us, such as your name, email address, and phone number via the contact form. We do not collect data through cookies or tracking technologies."
+      },
+      "use": {
+        "title": "How do we use your data?",
+        "content": "Your data is used solely to contact you in response to your message or appointment request. We never sell or share your data with third parties."
+      },
+      "storage": {
+        "title": "How long do we retain your data?",
+        "content": "We retain your personal data no longer than necessary for the purpose for which it was provided, with a maximum of two years."
+      },
+      "rights": {
+        "title": "Your rights",
+        "content": "You have the right to access, correct, or delete your personal data. Please contact us via the contact form to exercise these rights."
+      },
+      "contact": {
+        "title": "Contact",
+        "content": "For questions about this privacy policy, please contact us at info@pedagogischadvies.nl."
+      }
+    }
+  },
+  "terms": {
+    "pageTitle": "Terms of Service",
+    "lastUpdated": "Last updated: January 2025",
+    "intro": "These terms of service apply to all services offered through this website.",
+    "sections": {
+      "services": {
+        "title": "Services",
+        "content": "We offer pedagogical guidance and advice for children and families. The specific content and duration of services are determined in consultation."
+      },
+      "payment": {
+        "title": "Payment",
+        "content": "Payment arrangements are confirmed in writing prior to the commencement of services. Invoices must be paid within 14 days of the invoice date."
+      },
+      "cancellation": {
+        "title": "Cancellation",
+        "content": "Appointments may be cancelled free of charge up to 24 hours in advance. Later cancellations will be charged at 50% of the agreed rate."
+      },
+      "liability": {
+        "title": "Liability",
+        "content": "We are not liable for indirect damages arising from the use of our services. Our liability is limited to the amount of the service provided."
+      },
+      "disputes": {
+        "title": "Disputes",
+        "content": "Dutch law applies to these terms. Disputes are preferably resolved through mutual consultation."
+      }
+    }
+  },
+  "common": {
+    "online": "Online",
+    "inPerson": "In Person",
+    "learnMore": "Learn more",
+    "backToHome": "Back to home",
+    "skipToContent": "Skip to main content"
+  }
+}

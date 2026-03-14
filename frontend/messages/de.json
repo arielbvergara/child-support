@@ -1,0 +1,224 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "services": "Leistungen",
+    "about": "Über mich",
+    "contact": "Kontakt",
+    "bookConsultation": "Termin vereinbaren"
+  },
+  "hero": {
+    "headline": "Wachstum begleiten, eine Familie nach der anderen",
+    "subheadline": "Professionelle pädagogische Unterstützung für Kinder und Familien, die das Beste für ihre Kinder wollen.",
+    "ctaPrimary": "Termin vereinbaren",
+    "ctaSecondary": "Leistungen entdecken",
+    "onlineBadge": "Online",
+    "inPersonBadge": "Persönlich",
+    "trust1": "✓ Kostenloses Erstgespräch",
+    "trust2": "✓ Zertifizierte Fachkraft",
+    "trust3": "✓ Online & persönlich"
+  },
+  "services": {
+    "sectionTitle": "Wie ich helfen kann",
+    "sectionSubtitle": "Maßgeschneiderte Unterstützung, die auf die einzigartigen Bedürfnisse Ihres Kindes und Ihrer Familie abgestimmt ist.",
+    "learnMore": "Mehr erfahren",
+    "individual": {
+      "title": "Einzelberatung",
+      "description": "Persönliche Einzelsitzungen mit Eltern oder Familien, online oder vor Ort. Fokussiert auf Ihre spezifischen Fragen und Herausforderungen."
+    },
+    "workshops": {
+      "title": "Gruppenworkshops",
+      "description": "Interaktive Workshops zu Erziehung, Kinderentwicklung und Familiendynamik. Kleine Gruppen für optimale Beteiligung."
+    },
+    "assessment": {
+      "title": "Kinderbeurteilung",
+      "description": "Professionelle Entwicklungsbeurteilungen für Kinder. Einblicke in Stärken und Förderbereiche für gezielte Unterstützung."
+    },
+    "school": {
+      "title": "Schul- und Lehrerbegleitung",
+      "description": "Unterstützung für Schulen, Lehrkräfte und Bildungseinrichtungen bei pädagogischen Fragen und Klassenmanagement."
+    }
+  },
+  "trust": {
+    "years": {
+      "value": "10+",
+      "label": "Jahre Erfahrung"
+    },
+    "families": {
+      "value": "200+",
+      "label": "Familien begleitet"
+    },
+    "certified": {
+      "value": "Zertifiziert",
+      "label": "Fachkraft"
+    },
+    "sectionTitle": "Von Familien vertraut",
+    "sectionSubtitle": "Was Eltern über die Begleitung sagen"
+  },
+  "testimonials": {
+    "1": {
+      "quote": "Die Begleitung hat unserer Familie wirklich geholfen. Wir verstehen unsere Tochter jetzt viel besser und die Kommunikation zuhause hat sich enorm verbessert.",
+      "author": "Marieke V.",
+      "role": "Mutter zweier Kinder"
+    },
+    "2": {
+      "quote": "Professionell, herzlich und immer erreichbar für Fragen. Der Workshop zum Thema Grenzen setzen war für uns sehr aufschlussreich.",
+      "author": "Thomas & Lena B.",
+      "role": "Eltern"
+    }
+  },
+  "aboutTeaser": {
+    "sectionTitle": "Lernen Sie Ihre Pädagogin kennen",
+    "bio": "Mit über zehn Jahren Erfahrung in der pädagogischen Begleitung unterstütze ich Kinder und Familien bei ihrer Entwicklung. Mein Ansatz ist warm, praxisorientiert und stets auf Ihre einzigartige Situation abgestimmt.",
+    "credentials": ["M.Ed. Pädagogik", "Zertifizierte Fachkraft", "10+ Jahre Erfahrung"],
+    "linkText": "Meine Geschichte"
+  },
+  "cta": {
+    "headline": "Bereit für den ersten Schritt?",
+    "subheadline": "Nehmen Sie heute Kontakt auf für ein unverbindliches Erstgespräch.",
+    "button": "Kontakt aufnehmen"
+  },
+  "about": {
+    "pageTitle": "Über mich",
+    "biography": {
+      "title": "Meine Geschichte",
+      "paragraph1": "Als Pädagogin und Familienbegleiterin trage ich seit über zehn Jahren zur Entwicklung von Kindern und zur Stärke von Familien bei. Meine Leidenschaft für diese Arbeit begann während meines Studiums der Pädagogischen Wissenschaften, wo ich mich auf Kinder- und Familienpsychologie spezialisierte.",
+      "paragraph2": "Seitdem habe ich Hunderte von Familien durch vielfältige Herausforderungen begleitet: von Verhaltensfragen und Entwicklungsverzögerungen bis hin zu Schulproblemen und Familiendynamiken. Ich glaube fest an die Stärke jeder Familie und arbeite aus einem positiven, lösungsorientierten Ansatz heraus.",
+      "pullQuote": "Jedes Kind hat sein eigenes Tempo. Meine Aufgabe ist es, dieses Tempo zu respektieren und das Kind bei jedem Schritt zu unterstützen."
+    },
+    "qualifications": {
+      "title": "Qualifikationen & Ausbildung"
+    },
+    "credentials": {
+      "1": "Master der Pädagogischen Wissenschaften (M.Ed.)",
+      "2": "Postgraduales Zertifikat in Familientherapie",
+      "3": "Ausbildung in Entwicklungspsychologie",
+      "4": "Eingetragene Pädagogin"
+    },
+    "philosophy": {
+      "title": "Mein Ansatz",
+      "subtitle": "Drei Kernprinzipien, die meine Arbeit mit Kindern und Familien prägen",
+      "pillar1": {
+        "title": "Kindorientiert",
+        "description": "Das Kind steht im Mittelpunkt. Ich orientiere mich an den Bedürfnissen, dem Tempo und den Stärken jedes einzelnen Kindes."
+      },
+      "pillar2": {
+        "title": "Familienorientiert",
+        "description": "Eltern und Erziehungsberechtigte sind die Experten für ihr eigenes Kind. Ich arbeite mit der gesamten Familie als System."
+      },
+      "pillar3": {
+        "title": "Evidenzbasiert",
+        "description": "Mein Ansatz basiert auf aktueller wissenschaftlicher Forschung und bewährt wirksamen Methoden."
+      }
+    },
+    "ctaTitle": "Möchten Sie mehr erfahren?",
+    "ctaText": "Nehmen Sie gerne Kontakt auf für ein unverbindliches Erstgespräch.",
+    "ctaButton": "Kontakt aufnehmen"
+  },
+  "contact": {
+    "pageTitle": "Kontakt",
+    "pageSubtitle": "Stellen Sie eine Frage oder vereinbaren Sie einen Termin",
+    "info": {
+      "title": "Kontaktdaten",
+      "responseTime": "Antwort innerhalb von 24 Stunden an Werktagen"
+    },
+    "hours": {
+      "title": "Öffnungszeiten",
+      "weekdays": "Montag – Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "form": {
+      "title": "Nachricht senden",
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "sie@email.de",
+      "phone": "Telefonnummer (optional)",
+      "phonePlaceholder": "+49 30 12345678",
+      "service": "Ich interessiere mich für",
+      "serviceDefault": "Leistung auswählen",
+      "serviceOptions": {
+        "individual": "Einzelberatung",
+        "workshops": "Gruppenworkshop",
+        "assessment": "Kinderbeurteilung",
+        "school": "Schul- und Lehrerbegleitung",
+        "other": "Sonstiges / allgemeine Anfrage"
+      },
+      "message": "Ihre Nachricht",
+      "messagePlaceholder": "Erzählen Sie mir kurz von Ihrer Situation oder Ihrer Frage...",
+      "submit": "Nachricht senden",
+      "privacy": "Ihre Daten werden vertraulich behandelt und niemals an Dritte weitergegeben.",
+      "successTitle": "Nachricht erhalten!",
+      "successMessage": "Vielen Dank für Ihre Nachricht. Ich melde mich so bald wie möglich bei Ihnen."
+    }
+  },
+  "footer": {
+    "tagline": "Professionelle pädagogische Begleitung für Kinder und Familien.",
+    "navigation": "Navigation",
+    "legal": "Rechtliches",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "privacy": {
+    "pageTitle": "Datenschutzrichtlinie",
+    "lastUpdated": "Zuletzt aktualisiert: Januar 2025",
+    "intro": "Ihr Datenschutz ist uns wichtig. Diese Datenschutzrichtlinie erläutert, welche personenbezogenen Daten wir erheben, warum wir sie verwenden und wie wir damit umgehen.",
+    "sections": {
+      "collection": {
+        "title": "Welche Daten erheben wir?",
+        "content": "Wir erheben personenbezogene Daten, die Sie uns aktiv mitteilen, wie Ihren Namen, Ihre E-Mail-Adresse und Telefonnummer über das Kontaktformular. Wir erheben keine Daten durch Cookies oder Tracking-Technologien."
+      },
+      "use": {
+        "title": "Wie verwenden wir Ihre Daten?",
+        "content": "Ihre Daten werden ausschließlich genutzt, um Sie auf Ihre Nachricht oder Ihren Terminwunsch hin zu kontaktieren. Wir verkaufen oder teilen Ihre Daten niemals mit Dritten."
+      },
+      "storage": {
+        "title": "Wie lange speichern wir Ihre Daten?",
+        "content": "Wir speichern Ihre personenbezogenen Daten nicht länger als für den Zweck, für den sie bereitgestellt wurden, notwendig ist, maximal zwei Jahre."
+      },
+      "rights": {
+        "title": "Ihre Rechte",
+        "content": "Sie haben das Recht, Ihre personenbezogenen Daten einzusehen, zu korrigieren oder zu löschen. Bitte kontaktieren Sie uns über das Kontaktformular, um diese Rechte auszuüben."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "content": "Bei Fragen zu dieser Datenschutzrichtlinie wenden Sie sich bitte an info@pedagogischadvies.nl."
+      }
+    }
+  },
+  "terms": {
+    "pageTitle": "Nutzungsbedingungen",
+    "lastUpdated": "Zuletzt aktualisiert: Januar 2025",
+    "intro": "Diese Nutzungsbedingungen gelten für alle über diese Website angebotenen Leistungen.",
+    "sections": {
+      "services": {
+        "title": "Leistungen",
+        "content": "Wir bieten pädagogische Beratung und Begleitung für Kinder und Familien an. Der spezifische Inhalt und die Dauer der Leistungen werden gemeinsam vereinbart."
+      },
+      "payment": {
+        "title": "Zahlung",
+        "content": "Zahlungsvereinbarungen werden vor Beginn der Leistungserbringung schriftlich bestätigt. Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum zu begleichen."
+      },
+      "cancellation": {
+        "title": "Stornierung",
+        "content": "Termine können bis zu 24 Stunden vorher kostenfrei storniert werden. Bei späterer Stornierung werden 50% des vereinbarten Honorars berechnet."
+      },
+      "liability": {
+        "title": "Haftung",
+        "content": "Wir haften nicht für mittelbare Schäden, die aus der Nutzung unserer Leistungen entstehen. Unsere Haftung ist auf den Betrag der erbrachten Leistung begrenzt."
+      },
+      "disputes": {
+        "title": "Streitigkeiten",
+        "content": "Für diese Bedingungen gilt niederländisches Recht. Streitigkeiten werden vorzugsweise durch gegenseitige Absprache gelöst."
+      }
+    }
+  },
+  "common": {
+    "online": "Online",
+    "inPerson": "Persönlich",
+    "learnMore": "Mehr erfahren",
+    "backToHome": "Zur Startseite",
+    "skipToContent": "Zum Hauptinhalt springen"
+  }
+}
