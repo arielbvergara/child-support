@@ -147,9 +147,11 @@
       "message": "Your message",
       "messagePlaceholder": "Tell me briefly about your situation or question...",
       "submit": "Send Message",
+      "submitting": "Sending...",
       "privacy": "Your details are treated confidentially and never shared with third parties.",
       "successTitle": "Message received!",
-      "successMessage": "Thank you for your message. I will get back to you as soon as possible."
+      "successMessage": "Thank you for your message. I will get back to you as soon as possible.",
+      "errorMessage": "Something went wrong. Please try again or contact us directly."
     }
   },
   "footer": {
