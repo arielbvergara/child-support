@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.3.1",
     "express": "^4.21.2"
   },
   "devDependencies": {
