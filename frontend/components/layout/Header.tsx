@@ -44,12 +44,13 @@ export function Header({ locale }: HeaderProps) {
       }
     }
 
-    // Set the initial hash after mount to avoid SSR/client mismatches
+    // Set the initial hash after mount and whenever the pathname changes
+    // to avoid SSR/client mismatches and stale hash state.
     updateHash();
 
     window.addEventListener('hashchange', updateHash);
     return () => window.removeEventListener('hashchange', updateHash);
-  }, []);
+  }, [pathname]);
 
   // Get current page path without locale prefix for switching
   const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
