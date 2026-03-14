@@ -91,9 +91,9 @@ export function Header({ locale }: HeaderProps) {
           <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
             {NAV_LINKS.map((link) => {
               const [linkBasePath, linkHash] = link.href.split('#');
-              // Build href: anchor links use /locale#hash (no trailing slash before #)
+              // Build href: include base path for anchors, consistent with footer logic
               const href = linkHash
-                ? `/${locale}#${linkHash}`
+                ? `/${locale}${linkBasePath === '/' ? '' : linkBasePath}#${linkHash}`
                 : `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
               const localizedBase = `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
               const isAnchorLink = Boolean(linkHash);
