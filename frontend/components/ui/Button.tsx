@@ -45,7 +45,7 @@ export function Button({
 }: ButtonProps) {
   const classes = twMerge(
     clsx(
-      'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 cursor-pointer select-none',
+      'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors transform duration-200 cursor-pointer select-none',
       variantClasses[variant],
       sizeClasses[size],
       className
