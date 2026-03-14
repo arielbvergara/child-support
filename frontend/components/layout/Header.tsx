@@ -25,6 +25,9 @@ export function Header({ locale }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentHash, setCurrentHash] = useState(() =>
+    typeof window !== 'undefined' ? window.location.hash : ''
+  );
 
   useEffect(() => {
     function onScroll() {
@@ -32,6 +35,14 @@ export function Header({ locale }: HeaderProps) {
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    function onHashChange() {
+      setCurrentHash(window.location.hash);
+    }
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   // Get current page path without locale prefix for switching
@@ -76,17 +87,34 @@ export function Header({ locale }: HeaderProps) {
           {/* Desktop nav */}
           <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
             {NAV_LINKS.map((link) => {
-              const href = `/${locale}${link.href === '/' ? '' : link.href}`;
-              const isActive = pathname === href || (link.href === '/' && pathname === `/${locale}`);
+              const [linkBasePath, linkHash] = link.href.split('#');
+              // Build href: anchor links use /locale#hash (no trailing slash before #)
+              const href = linkHash
+                ? `/${locale}#${linkHash}`
+                : `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
+              const localizedBase = `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
+              const isAnchorLink = Boolean(linkHash);
+              const anchorNavActive = NAV_LINKS.some((l) => {
+                const [lBase, lHash] = l.href.split('#');
+                if (!lHash) return false;
+                const lLocalizedBase = `/${locale}${lBase === '/' ? '' : lBase}`;
+                return pathname === lLocalizedBase && currentHash === `#${lHash}`;
+              });
+              const isActive = isAnchorLink
+                ? pathname === localizedBase && currentHash === `#${linkHash}`
+                : link.href === '/'
+                  ? pathname === `/${locale}` && !anchorNavActive
+                  : pathname === `/${locale}${link.href}`;
               return (
                 <Link
                   key={link.href}
                   href={href}
+                  onClick={() => setCurrentHash(linkHash ? `#${linkHash}` : '')}
                   className={clsx(
                     'rounded-md px-3 py-2 text-sm font-medium transition-colors',
                     isActive
-                      ? 'bg-primary-light text-primary'
-                      : 'text-warm-700 hover:bg-warm-100 hover:text-foreground'
+                      ? 'bg-primary-light text-primary font-semibold'
+                      : 'text-warm-700 hover:bg-primary-light/50 hover:text-primary'
                   )}
                 >
                   {t(link.labelKey)}

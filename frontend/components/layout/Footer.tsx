@@ -12,13 +12,13 @@ export function Footer({ locale }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-warm-900 text-warm-200">
+    <footer className="border-t border-sage-200 bg-warm-900 text-warm-300">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -37,7 +37,7 @@ export function Footer({ locale }: FooterProps) {
                 {SITE_CONFIG.name}
               </span>
             </div>
-            <p className="mb-6 text-sm leading-relaxed text-warm-400">
+            <p className="mb-6 text-sm leading-relaxed text-warm-300">
               {t('footer.tagline')}
             </p>
 
@@ -46,7 +46,7 @@ export function Footer({ locale }: FooterProps) {
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="flex items-center gap-2 text-warm-400 transition-colors hover:text-white"
+                  className="flex items-center gap-2 text-warm-300 transition-colors hover:text-white"
                 >
                   <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
                   {CONTACT_INFO.email}
@@ -55,14 +55,14 @@ export function Footer({ locale }: FooterProps) {
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-2 text-warm-400 transition-colors hover:text-white"
+                  className="flex items-center gap-2 text-warm-300 transition-colors hover:text-white"
                 >
                   <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                   {CONTACT_INFO.phone}
                 </a>
               </li>
               <li>
-                <span className="flex items-start gap-2 text-warm-400">
+                <span className="flex items-start gap-2 text-warm-300">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>
                     {CONTACT_INFO.addressLine1}
@@ -84,7 +84,7 @@ export function Footer({ locale }: FooterProps) {
                 <li key={link.href}>
                   <Link
                     href={`/${locale}${link.href === '/' ? '' : link.href}`}
-                    className="text-sm text-warm-400 transition-colors hover:text-white"
+                    className="text-sm text-warm-300 transition-colors hover:text-white"
                   >
                     {t(link.labelKey)}
                   </Link>
@@ -102,7 +102,7 @@ export function Footer({ locale }: FooterProps) {
               <li>
                 <Link
                   href={`/${locale}/privacy-policy`}
-                  className="text-sm text-warm-400 transition-colors hover:text-white"
+                  className="text-sm text-warm-300 transition-colors hover:text-white"
                 >
                   {t('footer.privacyPolicy')}
                 </Link>
@@ -110,7 +110,7 @@ export function Footer({ locale }: FooterProps) {
               <li>
                 <Link
                   href={`/${locale}/terms-of-service`}
-                  className="text-sm text-warm-400 transition-colors hover:text-white"
+                  className="text-sm text-warm-300 transition-colors hover:text-white"
                 >
                   {t('footer.termsOfService')}
                 </Link>
@@ -132,7 +132,7 @@ export function Footer({ locale }: FooterProps) {
                       className={`text-sm transition-colors ${
                         loc === locale
                           ? 'font-semibold text-sage-300'
-                          : 'text-warm-400 hover:text-white'
+                          : 'text-warm-300 hover:text-white'
                       }`}
                       aria-current={loc === locale ? 'true' : undefined}
                     >
@@ -146,8 +146,8 @@ export function Footer({ locale }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-warm-800 pt-8">
-          <p className="text-center text-xs text-warm-500">
+        <div className="mt-10 border-t border-warm-700 pt-8">
+          <p className="text-center text-xs text-warm-400">
             &copy; {currentYear} {SITE_CONFIG.name}. {t('footer.copyright')}
           </p>
         </div>
