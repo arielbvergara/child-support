@@ -21,7 +21,7 @@
     "@types/jest": "^30.0.0",
     "@types/node": "^25",
     "@types/supertest": "^7.2.0",
-    "eslint": "^9",
+    "eslint": "^10",
     "jest": "^30.3.0",
     "prettier": "^3.5.3",
     "supertest": "^7.0.0",
