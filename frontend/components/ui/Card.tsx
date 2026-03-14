@@ -12,9 +12,9 @@ export function Card({ children, className, hover = false }: CardProps) {
     <div
       className={twMerge(
         clsx(
-          'rounded-xl bg-surface p-6 shadow-sm border border-border',
+          'rounded-2xl bg-surface p-6 shadow-sm border border-border',
           hover &&
-            'transition-shadow duration-200 hover:shadow-md',
+            'transition-[box-shadow,transform] duration-200 hover:shadow-lg hover:-translate-y-1',
           className
         )
       )}

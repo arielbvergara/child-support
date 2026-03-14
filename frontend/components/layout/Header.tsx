@@ -25,6 +25,7 @@ export function Header({ locale }: HeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [currentHash, setCurrentHash] = useState('');
 
   useEffect(() => {
     function onScroll() {
@@ -33,6 +34,19 @@ export function Header({ locale }: HeaderProps) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    function updateHash() {
+      setCurrentHash(window.location.hash);
+    }
+
+    // Set the initial hash after mount and whenever the pathname changes
+    // to avoid SSR/client mismatches and stale hash state.
+    updateHash();
+
+    window.addEventListener('hashchange', updateHash);
+    return () => window.removeEventListener('hashchange', updateHash);
+  }, [pathname]);
 
   // Get current page path without locale prefix for switching
   const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
@@ -76,17 +90,34 @@ export function Header({ locale }: HeaderProps) {
           {/* Desktop nav */}
           <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
             {NAV_LINKS.map((link) => {
-              const href = `/${locale}${link.href === '/' ? '' : link.href}`;
-              const isActive = pathname === href || (link.href === '/' && pathname === `/${locale}`);
+              const [linkBasePath, linkHash] = link.href.split('#');
+              // Build href: include base path for anchors, consistent with footer logic
+              const href = linkHash
+                ? `/${locale}${linkBasePath === '/' ? '' : linkBasePath}#${linkHash}`
+                : `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
+              const localizedBase = `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;
+              const isAnchorLink = Boolean(linkHash);
+              const anchorNavActive = NAV_LINKS.some((l) => {
+                const [lBase, lHash] = l.href.split('#');
+                if (!lHash) return false;
+                const lLocalizedBase = `/${locale}${lBase === '/' ? '' : lBase}`;
+                return pathname === lLocalizedBase && currentHash === `#${lHash}`;
+              });
+              const isActive = isAnchorLink
+                ? pathname === localizedBase && currentHash === `#${linkHash}`
+                : link.href === '/'
+                  ? pathname === `/${locale}` && !anchorNavActive
+                  : pathname === `/${locale}${link.href}`;
               return (
                 <Link
                   key={link.href}
                   href={href}
+                  onClick={() => setCurrentHash(linkHash ? `#${linkHash}` : '')}
                   className={clsx(
                     'rounded-md px-3 py-2 text-sm font-medium transition-colors',
                     isActive
-                      ? 'bg-primary-light text-primary'
-                      : 'text-warm-700 hover:bg-warm-100 hover:text-foreground'
+                      ? 'bg-primary-light text-primary font-semibold'
+                      : 'text-warm-700 hover:bg-primary-light/50 hover:text-primary'
                   )}
                 >
                   {t(link.labelKey)}

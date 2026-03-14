@@ -2,29 +2,47 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────────── */
 :root {
-  /* Sage green palette */
-  --color-sage-50: #f4f7f4;
-  --color-sage-100: #e6ede6;
-  --color-sage-200: #cddccd;
-  --color-sage-300: #a8c2a8;
-  --color-sage-400: #7da37d;
-  --color-sage-500: #5c8a5c;
-  --color-sage-600: #496e49;
-  --color-sage-700: #3b583b;
-  --color-sage-800: #2f472f;
-  --color-sage-900: #263a26;
+  /* Teal palette (primary brand — calm, professional, nature) */
+  --color-sage-50: #ebf7f5;
+  --color-sage-100: #c5eae5;
+  --color-sage-200: #8dd3cb;
+  --color-sage-300: #50b8ad;
+  --color-sage-400: #2aaaa0;
+  --color-sage-500: #2a9d8f;
+  --color-sage-600: #21867a;
+  --color-sage-700: #1a6d63;
+  --color-sage-800: #14564e;
+  --color-sage-900: #0e3f39;
 
-  /* Warm neutral palette */
-  --color-warm-50: #faf9f7;
-  --color-warm-100: #f3f0ec;
-  --color-warm-200: #e8e2d9;
-  --color-warm-300: #d5cbbf;
-  --color-warm-400: #b8a999;
-  --color-warm-500: #9a8a78;
-  --color-warm-600: #7d6e5e;
-  --color-warm-700: #655848;
-  --color-warm-800: #4e4438;
-  --color-warm-900: #3c342c;
+  /* Warm neutral palette (backgrounds, text, borders — teal-tinted) */
+  --color-warm-50: #f9faf8;
+  --color-warm-100: #eef3f1;
+  --color-warm-200: #d5e8e4;
+  --color-warm-300: #b8d4cf;
+  --color-warm-400: #8ab3ae;
+  --color-warm-500: #628f8a;
+  --color-warm-600: #4e7470;
+  --color-warm-700: #3c5c59;
+  --color-warm-800: #2c4542;
+  --color-warm-900: #1e3a35;
+
+  /* Coral accent palette (CTAs, warm energy, child-friendly) */
+  --color-coral-50: #fef0eb;
+  --color-coral-100: #fdddd0;
+  --color-coral-200: #fbc4af;
+  --color-coral-300: #f8a98c;
+  --color-coral-500: #f4845f;
+  --color-coral-600: #e06a45;
+  --color-coral-700: #c45530;
+
+  /* Sky blue palette (secondary, playful, trust) */
+  --color-sky-50: #ebf7fc;
+  --color-sky-100: #d0eefa;
+  --color-sky-200: #a6dcef;
+  --color-sky-300: #7ccfe6;
+  --color-sky-500: #6ec6e0;
+  --color-sky-600: #4baec9;
+  --color-sky-700: #3390ac;
 
   /* Semantic tokens */
   --color-background: var(--color-warm-50);
@@ -32,19 +50,23 @@
   --color-primary: var(--color-sage-500);
   --color-primary-hover: var(--color-sage-600);
   --color-primary-light: var(--color-sage-50);
+  --color-accent: var(--color-coral-500);
+  --color-accent-hover: var(--color-coral-600);
   --color-secondary: var(--color-warm-200);
+  --color-sky: var(--color-sky-500);
+  --color-sky-light: var(--color-sky-50);
   --color-muted: var(--color-warm-500);
   --color-border: var(--color-warm-200);
   --color-surface: #ffffff;
 
   /* Typography */
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-lora);
+  --font-display: var(--font-poppins);
 }
 
 @theme inline {
-  /* Sage colors */
+  /* Teal (sage) colors */
   --color-sage-50: var(--color-sage-50);
   --color-sage-100: var(--color-sage-100);
   --color-sage-200: var(--color-sage-200);
@@ -68,13 +90,35 @@
   --color-warm-800: var(--color-warm-800);
   --color-warm-900: var(--color-warm-900);
 
+  /* Coral accent colors */
+  --color-coral-50: var(--color-coral-50);
+  --color-coral-100: var(--color-coral-100);
+  --color-coral-200: var(--color-coral-200);
+  --color-coral-300: var(--color-coral-300);
+  --color-coral-500: var(--color-coral-500);
+  --color-coral-600: var(--color-coral-600);
+  --color-coral-700: var(--color-coral-700);
+
+  /* Sky blue colors */
+  --color-sky-50: var(--color-sky-50);
+  --color-sky-100: var(--color-sky-100);
+  --color-sky-200: var(--color-sky-200);
+  --color-sky-300: var(--color-sky-300);
+  --color-sky-500: var(--color-sky-500);
+  --color-sky-600: var(--color-sky-600);
+  --color-sky-700: var(--color-sky-700);
+
   /* Semantic */
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);
   --color-primary-light: var(--color-primary-light);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
   --color-secondary: var(--color-secondary);
+  --color-sky: var(--color-sky);
+  --color-sky-light: var(--color-sky-light);
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
   --color-surface: var(--color-surface);
@@ -132,12 +176,12 @@ body {
 }
 
 .prose h2 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  color: var(--color-warm-900);
+  color: var(--color-foreground);
 }
 
 .prose h3 {

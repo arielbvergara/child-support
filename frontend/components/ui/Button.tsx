@@ -8,9 +8,9 @@ type Size = 'sm' | 'md' | 'lg';
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-primary text-white hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'bg-accent text-white hover:bg-accent-hover focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 hover:scale-[1.02] active:scale-[0.98]',
   secondary:
-    'bg-secondary text-warm-900 hover:bg-warm-300 focus-visible:ring-2 focus-visible:ring-warm-400 focus-visible:ring-offset-2',
+    'bg-primary-light text-primary hover:bg-sage-100 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
   ghost:
     'bg-transparent text-primary border border-primary hover:bg-primary-light focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
   white:
@@ -45,7 +45,7 @@ export function Button({
 }: ButtonProps) {
   const classes = twMerge(
     clsx(
-      'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors duration-200 cursor-pointer select-none',
+      'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors transform duration-200 cursor-pointer select-none',
       variantClasses[variant],
       sizeClasses[size],
       className
