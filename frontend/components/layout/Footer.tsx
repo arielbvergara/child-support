@@ -80,16 +80,25 @@ export function Footer({ locale }: FooterProps) {
               {t('footer.navigation')}
             </h3>
             <ul className="space-y-2">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={`/${locale}${link.href === '/' ? '' : link.href}`}
-                    className="text-sm text-warm-300 transition-colors hover:text-white"
-                  >
-                    {t(link.labelKey)}
-                  </Link>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const [path, hash] = link.href.split('#');
+                let localizedHref = `/${locale}${path === '/' ? '' : path}`;
+
+                if (hash) {
+                  localizedHref += `#${hash}`;
+                }
+
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={localizedHref}
+                      className="text-sm text-warm-300 transition-colors hover:text-white"
+                    >
+                      {t(link.labelKey)}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
