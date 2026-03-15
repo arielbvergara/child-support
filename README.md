@@ -23,6 +23,7 @@ A multilingual web platform for **Pedagogisch Advies** — a child and family de
 | Backend | Express.js, TypeScript, Node.js 20 |
 | Package Manager | pnpm v10 (workspaces) |
 | Testing | Jest, Supertest |
+| Error Monitoring | Sentry (`@sentry/nextjs`, `@sentry/node`) |
 | CI/CD | GitHub Actions, Dependabot |
 | Containerization | Docker (Alpine), docker-compose |
 
