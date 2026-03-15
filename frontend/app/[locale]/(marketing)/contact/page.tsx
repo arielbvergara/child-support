@@ -3,7 +3,9 @@ import { useTranslations } from 'next-intl';
 import { ContactInfo } from '@/components/sections/contact/ContactInfo';
 import { ContactFormSection } from '@/components/sections/contact/ContactFormSection';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { createMetadata } from '@/lib/metadata';
+import { buildBreadcrumbSchema } from '@/lib/seo';
 import type { Locale } from '@/lib/types';
 
 interface PageProps {
@@ -20,6 +22,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
+const BREADCRUMB_NAMES: Record<string, { home: string; contact: string }> = {
+  nl: { home: 'Home', contact: 'Contact' },
+  en: { home: 'Home', contact: 'Contact' },
+  de: { home: 'Startseite', contact: 'Kontakt' },
+};
+
 function PageHero() {
   const t = useTranslations('contact');
   return (
@@ -35,10 +43,17 @@ function PageHero() {
 }
 
 export default async function ContactPage({ params }: PageProps) {
-  await params;
+  const { locale } = await params;
+  const names = BREADCRUMB_NAMES[locale] ?? BREADCRUMB_NAMES.nl;
 
   return (
     <>
+      <JsonLd
+        schema={buildBreadcrumbSchema(locale, [
+          { name: names.home, path: '' },
+          { name: names.contact, path: '/contact' },
+        ])}
+      />
       <PageHero />
       <SectionWrapper className="bg-white">
         <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">

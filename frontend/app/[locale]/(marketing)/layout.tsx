@@ -4,9 +4,20 @@ import { Footer } from '@/components/layout/Footer';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { CONTACT_INFO, SITE_CONFIG } from '@/lib/constants';
 
-const localBusinessSchema = {
+const websiteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'WebSite',
+  '@id': `${SITE_CONFIG.siteUrl}/#website`,
+  url: SITE_CONFIG.siteUrl,
+  name: SITE_CONFIG.name,
+  description:
+    'Professionele pedagogische begeleiding voor kinderen en gezinnen.',
+  inLanguage: ['nl', 'en', 'de'],
+};
+
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['ProfessionalService', 'LocalBusiness'],
   '@id': `${SITE_CONFIG.siteUrl}/#business`,
   name: SITE_CONFIG.name,
   description:
@@ -14,6 +25,8 @@ const localBusinessSchema = {
   url: SITE_CONFIG.siteUrl,
   telephone: CONTACT_INFO.phone,
   email: CONTACT_INFO.email,
+  image: `${SITE_CONFIG.siteUrl}/images/og-image.jpg`,
+  priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
     streetAddress: CONTACT_INFO.addressLine1,
@@ -21,6 +34,16 @@ const localBusinessSchema = {
     postalCode: '1234 AB',
     addressCountry: 'NL',
   },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 52.3676,
+    longitude: 4.9041,
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Netherlands',
+  },
+  knowsLanguage: ['nl', 'en', 'de'],
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -35,8 +58,48 @@ const localBusinessSchema = {
       closes: '14:00',
     },
   ],
-  priceRange: '$$',
-  image: `${SITE_CONFIG.siteUrl}/images/og-image.jpg`,
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Pedagogische Diensten',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Individueel Consult',
+          description:
+            'Persoonlijke één-op-één sessies met ouders of gezinnen, online of persoonlijk.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Groepsworkshops',
+          description:
+            'Interactieve workshops over opvoeding, ontwikkeling en gezinsrelaties.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Kinderbeoordeling',
+          description:
+            'Professionele ontwikkelingsbeoordelingen voor kinderen.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'School- en Leerkrachtbegeleiding',
+          description:
+            'Ondersteuning voor scholen, leerkrachten en educatieve instellingen.',
+        },
+      },
+    ],
+  },
 };
 
 interface MarketingLayoutProps {
@@ -61,7 +124,8 @@ export default async function MarketingLayout({
 
   return (
     <>
-      <JsonLd schema={localBusinessSchema} />
+      <JsonLd schema={websiteSchema} />
+      <JsonLd schema={professionalServiceSchema} />
       <SkipLink />
       <Header locale={locale} />
       <main id="main-content" tabIndex={-1}>

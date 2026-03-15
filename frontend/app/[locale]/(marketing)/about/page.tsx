@@ -3,7 +3,10 @@ import { useTranslations } from 'next-intl';
 import { BiographySection } from '@/components/sections/about/BiographySection';
 import { QualificationsSection } from '@/components/sections/about/QualificationsSection';
 import { PhilosophySection } from '@/components/sections/about/PhilosophySection';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { createMetadata } from '@/lib/metadata';
+import { SITE_CONFIG } from '@/lib/constants';
+import { buildBreadcrumbSchema } from '@/lib/seo';
 import type { Locale } from '@/lib/types';
 
 interface PageProps {
@@ -19,6 +22,59 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   });
 }
+
+function buildPersonSchema(locale: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${SITE_CONFIG.siteUrl}/#person`,
+    name: 'Pedagogisch Adviseur',
+    jobTitle: 'Pedagoog / Pedagogisch Adviseur',
+    description:
+      'Met meer dan tien jaar ervaring in de pedagogische begeleiding help ik kinderen en gezinnen bij hun ontwikkeling.',
+    url: `${SITE_CONFIG.siteUrl}/${locale}/about`,
+    worksFor: {
+      '@id': `${SITE_CONFIG.siteUrl}/#business`,
+    },
+    knowsLanguage: ['nl', 'en', 'de'],
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        name: 'Master Pedagogische Wetenschappen (M.Ed.)',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Universiteit van Amsterdam',
+        },
+        dateCreated: '2012',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certificate',
+        name: 'Postdoctoraal certificaat Gezinstherapie',
+        dateCreated: '2015',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certificate',
+        name: 'Opleiding Ontwikkelingspsychologie Kinderen',
+        dateCreated: '2018',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'license',
+        name: 'NIP-geregistreerd pedagoog',
+        dateCreated: '2020',
+      },
+    ],
+  };
+}
+
+const BREADCRUMB_NAMES: Record<string, { home: string; about: string }> = {
+  nl: { home: 'Home', about: 'Over mij' },
+  en: { home: 'Home', about: 'About Me' },
+  de: { home: 'Startseite', about: 'Über mich' },
+};
 
 function PageHero() {
   const t = useTranslations('about');
@@ -55,9 +111,17 @@ function AboutCta({ locale }: { locale: string }) {
 
 export default async function AboutPage({ params }: PageProps) {
   const { locale } = await params;
+  const names = BREADCRUMB_NAMES[locale] ?? BREADCRUMB_NAMES.nl;
 
   return (
     <>
+      <JsonLd schema={buildPersonSchema(locale)} />
+      <JsonLd
+        schema={buildBreadcrumbSchema(locale, [
+          { name: names.home, path: '' },
+          { name: names.about, path: '/about' },
+        ])}
+      />
       <PageHero />
       <BiographySection />
       <QualificationsSection />

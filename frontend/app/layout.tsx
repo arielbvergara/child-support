@@ -1,26 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist_Mono, Nunito, Poppins } from 'next/font/google';
 import './globals.css';
-
-const nunito = Nunito({
-  variable: '--font-nunito',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const poppins = Poppins({
-  variable: '--font-poppins',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -44,13 +23,5 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html suppressHydrationWarning>
-      <body
-        className={`${nunito.variable} ${poppins.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+  return <>{children}</>;
 }
