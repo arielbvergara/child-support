@@ -14,6 +14,7 @@ Next.js 16 web application for the Child & Family Development Support platform. 
 | framer-motion | — | Animations |
 | lucide-react | — | Icon library |
 | clsx + tailwind-merge | — | Conditional class name utilities |
+| @sentry/nextjs | — | Error monitoring (client, server, and edge runtimes) |
 | ESLint | — | Linting |
 
 ## Project Structure
@@ -157,6 +158,26 @@ The following HTTP security headers are applied to all routes via `next.config.t
 
 ## Environment Variables
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL used for metadata and structured data (e.g., `https://example.com`) |
+Copy `.env.example` to `.env.local` and adjust as needed:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Required | Description |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | Yes | Backend API base URL (e.g., `http://localhost:3001`) |
+| `NEXT_PUBLIC_SENTRY_DSN` | No | Sentry DSN for runtime error reporting. Leave empty to disable Sentry locally. |
+| `SENTRY_AUTH_TOKEN` | No | Sentry auth token used **at build time only** to upload source maps and create releases. Without it, Sentry still captures errors but stack traces show minified/compiled code. Set this in your CI/CD environment and deployment platform (e.g., Vercel environment variables), never in `.env.local`. Generate one at sentry.io → User Auth Tokens with the `project:releases` scope. |
+
+## Error Monitoring
+
+Runtime errors are captured by [Sentry](https://sentry.io) across all three Next.js runtimes:
+
+- **Client** (`sentry.client.config.ts`) — browser-side errors
+- **Server** (`sentry.server.config.ts`) — SSR and API route errors
+- **Edge** (`sentry.edge.config.ts`) — middleware errors
+
+The `instrumentation.ts` file (Next.js App Router hook) loads the correct config per runtime at startup.
+
+Sentry is skipped entirely when `NEXT_PUBLIC_SENTRY_DSN` is not set, so local development works without any configuration.
