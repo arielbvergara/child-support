@@ -10,6 +10,15 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#39;');
 }
 
+/**
+ * Strips CR, LF, and other ASCII control characters from a string to prevent
+ * email header injection when the value is used in a header field (e.g. subject).
+ */
+function sanitizeForHeader(str: string): string {
+  // eslint-disable-next-line no-control-regex -- intentional: strips ASCII control chars to prevent header injection
+  return str.replace(/[\r\n\x00-\x1f\x7f]/g, '');
+}
+
 export function createEmailService(
   apiKey: string,
   fromEmail: string,
@@ -45,7 +54,7 @@ export function createEmailService(
     await resend.emails.send({
       from: fromEmail,
       to: [ownerEmail],
-      subject: `New contact request from ${payload.name}`,
+      subject: `New contact request from ${sanitizeForHeader(payload.name)}`,
       html: `
         <h2>You have received a new contact request</h2>
         <table cellpadding="8">

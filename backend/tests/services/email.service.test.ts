@@ -79,4 +79,20 @@ describe('createEmailService', () => {
     );
     expect((ownerCall?.[0] as { html: string }).html).not.toContain('docs.google.com');
   });
+
+  it('sendContactEmails_ShouldStripControlCharactersFromSubject_WhenNameContainsCRLF', async () => {
+    const maliciousPayload: ValidatedContactPayload = {
+      ...validPayload,
+      name: 'Injected\r\nBcc: attacker@evil.com\r\nName',
+    };
+    const emailService = createEmailService('test-api-key', 'noreply@example.com', TEST_OWNER_EMAIL);
+    await emailService.sendContactEmails(maliciousPayload);
+
+    const ownerCall = mockSend.mock.calls.find(
+      (call) => (call[0] as { to: string[] }).to[0] === TEST_OWNER_EMAIL,
+    );
+    const subject = (ownerCall?.[0] as { subject: string }).subject;
+    expect(subject).not.toMatch(/[\r\n]/);
+    expect(subject).toContain('InjectedBcc: attacker@evil.comName');
+  });
 });
