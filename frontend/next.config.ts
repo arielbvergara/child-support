@@ -3,6 +3,12 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+const isDev = process.env.NODE_ENV === 'development';
+
+// Include the backend API origin in connect-src so cross-origin fetch requests
+// to NEXT_PUBLIC_API_URL are not blocked by CSP.
+const apiOrigin = process.env.NEXT_PUBLIC_API_URL ?? '';
+
 const nextConfig: NextConfig = {
   headers: async () => [
     {
@@ -20,16 +26,18 @@ const nextConfig: NextConfig = {
           value: 'max-age=31536000; includeSubDomains',
         },
         {
-          // next-intl and Next.js require unsafe-inline for styles and scripts;
-          // frame-ancestors 'none' replaces X-Frame-Options for modern browsers
+          // next-intl and Next.js require unsafe-inline for styles and scripts.
+          // unsafe-eval is only needed in development (e.g. hot-reload eval); it is
+          // intentionally excluded from production to maintain a stronger CSP.
+          // frame-ancestors 'none' replaces X-Frame-Options for modern browsers.
           key: 'Content-Security-Policy',
           value: [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
             "style-src 'self' 'unsafe-inline'",
             "img-src 'self' data:",
             "font-src 'self'",
-            "connect-src 'self'",
+            `connect-src 'self'${apiOrigin ? ` ${apiOrigin}` : ''}`,
             "frame-ancestors 'none'",
           ].join('; '),
         },
