@@ -132,6 +132,19 @@ describe('POST /contact', () => {
     expect(res.body).toEqual({ success: true });
   });
 
+  it('sendContact_ShouldLogRejectionReason_WhenEmailServiceFails', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockSend.mockRejectedValue(new Error('SMTP connection refused'));
+
+    await request(app).post('/contact').send(validBody);
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Failed to send contact notification email',
+      expect.objectContaining({ err: 'SMTP connection refused' }),
+    );
+    consoleSpy.mockRestore();
+  });
+
   it('sendContact_ShouldReturn200_WhenSheetsFailsButEmailSucceeds', async () => {
     // Override default mockFetch: token exchange succeeds, Sheets append fails
     mockFetch.mockReset();

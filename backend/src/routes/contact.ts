@@ -106,10 +106,16 @@ export function createContactRouter(): IRouter {
       ]);
 
       if (results[0].status === 'rejected') {
-        console.error('Failed to send contact notification email');
+        const reason = results[0].reason;
+        console.error('Failed to send contact notification email', {
+          err: reason instanceof Error ? reason.message : String(reason),
+        });
       }
       if (results[1].status === 'rejected') {
-        console.error('Failed to save contact submission to Google Sheets');
+        const reason = results[1].reason;
+        console.error('Failed to save contact submission to Google Sheets', {
+          err: reason instanceof Error ? reason.message : String(reason),
+        });
       }
 
       res.status(HTTP_STATUS.OK).json({ success: true });
