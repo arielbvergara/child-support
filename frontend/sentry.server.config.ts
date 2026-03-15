@@ -11,5 +11,6 @@ if (dsn) {
     // Deliberately disabled: this app handles family and child data;
     // capturing PII (e.g. IP addresses) is avoided for privacy compliance.
     sendDefaultPii: false,
+    enableLogs: true
   });
 }
