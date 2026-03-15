@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/node';
 import express, { type Application, type Request, type Response, type NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -50,6 +51,10 @@ const contactRateLimit = rateLimit({
 
 app.use(CONTACT_ROUTE_PATH, contactRateLimit);
 app.use(CONTACT_ROUTE_PATH, createContactRouter());
+
+// Sentry error handler must be registered after all routes and before any
+// other error-handling middleware so it can capture unhandled errors.
+Sentry.setupExpressErrorHandler(app);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
