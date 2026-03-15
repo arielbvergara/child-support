@@ -6,7 +6,7 @@ export const CONTACT_VALIDATION = {
   PHONE_MAX_LENGTH: 20,
   SERVICE_MAX_LENGTH: 100,
   MESSAGE_MAX_LENGTH: 2000,
-  // RFC 5321-compliant: requires a proper TLD with at least 2 alphabetic characters
+  // Simple heuristic email check: requires a TLD with at least 2 alphabetic characters (not fully RFC-compliant)
   EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/,
 } as const;
 
