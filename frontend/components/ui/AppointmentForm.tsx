@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock } from 'lucide-react';
 import { Button } from './Button';
+import { SCHEDULE_CONFIG } from '@/lib/constants';
 
 type TimeSlot = {
   datetime: string;
@@ -25,21 +26,9 @@ const INITIAL_FORM_DATA: FormData = {
   notes: '',
 };
 
-const DAYS_OF_WEEK_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] as const;
-const MONTH_KEYS = [
-  'jan', 'feb', 'mar', 'apr', 'may', 'jun',
-  'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
-] as const;
-
-const DAY_LABELS: Record<string, string> = {
-  sun: 'Su', mon: 'Mo', tue: 'Tu', wed: 'We',
-  thu: 'Th', fri: 'Fr', sat: 'Sa',
-};
-const MONTH_LABELS: Record<string, string> = {
-  jan: 'January', feb: 'February', mar: 'March', apr: 'April',
-  may: 'May', jun: 'June', jul: 'July', aug: 'August',
-  sep: 'September', oct: 'October', nov: 'November', dec: 'December',
-};
+// Reference Sunday (2024-01-07) used to derive locale-aware day-of-week labels.
+// Offset by day index to get Sun=0, Mon=1, …, Sat=6.
+const REFERENCE_SUNDAY = new Date(2024, 0, 7);
 
 function toDateKey(date: Date): string {
   const y = date.getFullYear();
@@ -90,6 +79,14 @@ function buildCalendarWeeks(year: number, month: number): (Date | null)[][] {
 
 export function AppointmentForm() {
   const t = useTranslations('appointment.form');
+  const locale = useLocale();
+
+  // Locale-aware day-of-week abbreviations (Sun–Sat) derived from Intl
+  const dayLabels = Array.from({ length: 7 }, (_, i) =>
+    new Intl.DateTimeFormat(locale, { weekday: 'short' }).format(
+      new Date(REFERENCE_SUNDAY.getTime() + i * 24 * 60 * 60 * 1000),
+    ),
+  );
 
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [isLoadingSlots, setIsLoadingSlots] = useState(true);
@@ -217,7 +214,7 @@ export function AppointmentForm() {
         </h3>
         <p className="text-warm-600">{t('successMessage')}</p>
         <p className="mt-2 rounded-lg bg-white px-6 py-3 text-sm font-medium text-warm-800 shadow-sm">
-          {formatDate(selectedDatetime, 'nl-NL')} — {formatTime(selectedDatetime, 'nl-NL')}
+          {formatDate(selectedDatetime, locale)} — {formatTime(selectedDatetime, locale)}
         </p>
       </div>
     );
@@ -244,14 +241,17 @@ export function AppointmentForm() {
 
   const { year, month } = calendarMonth;
   const calendarWeeks = buildCalendarWeeks(year, month);
-  const monthKey = MONTH_KEYS[month];
+  // Locale-aware full month name for the calendar header
+  const monthLabel = new Intl.DateTimeFormat(locale, { month: 'long' }).format(
+    new Date(year, month, 1),
+  );
 
   // Min/max months for navigation (today → +2 months)
   const now = new Date();
   const minYear = now.getFullYear();
   const minMonth = now.getMonth();
   const maxDate = new Date(now);
-  maxDate.setMonth(maxDate.getMonth() + 2);
+  maxDate.setMonth(maxDate.getMonth() + SCHEDULE_CONFIG.BOOKING_WINDOW_MONTHS);
   const maxYear = maxDate.getFullYear();
   const maxMonth = maxDate.getMonth();
 
@@ -280,7 +280,7 @@ export function AppointmentForm() {
             <ChevronLeft className="h-5 w-5" />
           </button>
           <span className="font-semibold text-warm-800">
-            {MONTH_LABELS[monthKey]} {year}
+            {monthLabel} {year}
           </span>
           <button
             type="button"
@@ -293,11 +293,11 @@ export function AppointmentForm() {
           </button>
         </div>
 
-        {/* Day-of-week headers */}
+        {/* Day-of-week headers — locale-aware abbreviations (Sun … Sat) */}
         <div className="grid grid-cols-7 mb-1">
-          {DAYS_OF_WEEK_KEYS.map((key) => (
-            <div key={key} className="text-center text-xs font-medium text-warm-400 py-1">
-              {DAY_LABELS[key]}
+          {dayLabels.map((label, i) => (
+            <div key={i} className="text-center text-xs font-medium text-warm-400 py-1">
+              {label}
             </div>
           ))}
         </div>
@@ -366,7 +366,7 @@ export function AppointmentForm() {
                         : 'border-border bg-white text-warm-700 hover:border-primary hover:text-primary',
                     ].join(' ')}
                   >
-                    {formatTime(slot.datetime, 'nl-NL')}
+                    {formatTime(slot.datetime, locale)}
                   </button>
                 );
               })}
@@ -391,7 +391,7 @@ export function AppointmentForm() {
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-sage-50 px-4 py-2 text-sm text-warm-700">
             <Clock className="h-4 w-4 text-primary" />
             <span>
-              {formatDate(selectedDatetime, 'nl-NL')} — {formatTime(selectedDatetime, 'nl-NL')}
+              {formatDate(selectedDatetime, locale)} — {formatTime(selectedDatetime, locale)}
             </span>
             <button
               type="button"
