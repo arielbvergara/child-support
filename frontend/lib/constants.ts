@@ -11,8 +11,8 @@ export const NAV_LINKS: NavLink[] = [
   { labelKey: 'nav.home', href: '/' },
   { labelKey: 'nav.services', href: '/#services' },
   { labelKey: 'nav.about', href: '/about' },
-  { labelKey: 'nav.contact', href: '/contact' },
-  { labelKey: 'nav.bookConsultation', href: '/make-an-appointment' },
+  { labelKey: 'nav.contact', href: '/contact', hideDesktop: true },
+  { labelKey: 'nav.bookConsultation', href: '/make-an-appointment', hideMobile: true },
 ];
 
 /**
