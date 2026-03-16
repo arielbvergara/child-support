@@ -22,7 +22,7 @@
     "resend": "^6.9.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9",
+    "@eslint/js": "^10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
