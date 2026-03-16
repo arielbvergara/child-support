@@ -30,6 +30,7 @@ frontend/
 │           ├── page.tsx                  # Home page
 │           ├── about/page.tsx            # About page
 │           ├── contact/page.tsx          # Contact page
+│           ├── make-an-appointment/page.tsx # Appointment booking page
 │           ├── privacy-policy/page.tsx   # Privacy policy
 │           └── terms-of-service/page.tsx # Terms of service
 ├── components/
@@ -43,6 +44,7 @@ frontend/
 │   │   ├── Badge.tsx                     # Badge component
 │   │   ├── Heading.tsx                   # Typography heading
 │   │   ├── SectionWrapper.tsx            # Section layout wrapper
+│   │   ├── AppointmentForm.tsx           # Multi-step appointment booking form with calendar picker
 │   │   └── ContactForm.tsx               # Contact form
 │   ├── sections/
 │   │   ├── landing/
@@ -130,6 +132,7 @@ The App Router uses a `[locale]` dynamic segment at the top level. The `(marketi
 | `/[locale]` | Home |
 | `/[locale]/about` | About |
 | `/[locale]/contact` | Contact |
+| `/[locale]/make-an-appointment` | Appointment Booking |
 | `/[locale]/privacy-policy` | Privacy Policy |
 | `/[locale]/terms-of-service` | Terms of Service |
 
@@ -138,6 +141,7 @@ The App Router uses a `[locale]` dynamic segment at the top level. The `(marketi
 Reusable primitives live in `components/ui/`. Key patterns:
 
 - **Button** — polymorphic (`as` prop); supports `primary`, `secondary`, `outline`, `ghost` variants and `sm`, `md`, `lg` sizes.
+- **AppointmentForm** — multi-step booking form (contact details → date picker → time picker → confirmation). Fetches available slots from the backend API, renders a locale-aware calendar using `Intl.DateTimeFormat`, and submits the booking.
 - **SectionWrapper** — standardizes section padding and max-width layout.
 - **Heading** — controls heading level (`h1`–`h6`) and visual size independently.
 
