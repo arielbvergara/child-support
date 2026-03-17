@@ -146,7 +146,12 @@ export function AppointmentForm() {
     return acc;
   }, {});
 
-  const availableDates = new Set(Object.keys(slotsByDate));
+  // Only dates with at least one open slot are selectable; fully-booked days are blocked
+  const availableDates = new Set(
+    Object.entries(slotsByDate)
+      .filter(([, daySlots]) => daySlots.some((s) => s.available))
+      .map(([key]) => key),
+  );
 
   const today = toDateKey(new Date());
 
@@ -383,12 +388,11 @@ export function AppointmentForm() {
                     <div
                       key={slot.datetime}
                       className="flex flex-col items-center rounded-lg border border-border bg-warm-50 px-4 py-2 text-sm cursor-not-allowed"
-                      aria-label={`${formatTimeRange(slot.datetime, locale)} — ${t('slotBooked')}`}
+                      aria-label={formatTimeRange(slot.datetime, locale)}
                     >
                       <span className="font-medium text-warm-300 line-through">
                         {formatTimeRange(slot.datetime, locale)}
                       </span>
-                      <span className="text-xs text-warm-400">{t('slotBooked')}</span>
                     </div>
                   );
                 }
