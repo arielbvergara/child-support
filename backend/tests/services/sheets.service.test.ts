@@ -92,6 +92,19 @@ describe('createSheetsService', () => {
     expect(sheetsCallUrl).toContain(encodeURIComponent(SHEETS_RANGE));
   });
 
+  it('appendContactSubmission_ShouldUseRawValueInputOption_WhenPayloadIsValid', async () => {
+    // Ensures USER_ENTERED is never used — that option allows Google Sheets
+    // to interpret cell values starting with '=' as formulas, enabling
+    // formula/CSV injection via user-submitted data.
+    mockSuccessfulFetch();
+    const service = createSheetsService('sa@project.iam.gserviceaccount.com', 'key', 'sheet-id');
+    await service.appendContactSubmission(validPayload);
+
+    const sheetsCallUrl = mockFetch.mock.calls[1][0] as string;
+    expect(sheetsCallUrl).toContain('valueInputOption=RAW');
+    expect(sheetsCallUrl).not.toContain('valueInputOption=USER_ENTERED');
+  });
+
   it('appendContactSubmission_ShouldPropagateError_WhenSheetsApiThrows', async () => {
     mockFetch
       .mockResolvedValueOnce({

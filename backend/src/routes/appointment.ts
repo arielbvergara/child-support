@@ -8,6 +8,7 @@ import {
   APPOINTMENT_VALIDATION,
   APPOINTMENT_RATE_LIMIT_MAX,
   APPOINTMENT_RATE_LIMIT_WINDOW_MS,
+  AVAILABILITY_RATE_LIMIT_MAX,
   BUSINESS_TIMEZONE,
   WORKING_SCHEDULE,
   SLOT_DURATION_MINUTES,
@@ -156,6 +157,17 @@ export function createAppointmentRouter(): IRouter {
     skip: () => process.env.NODE_ENV === 'test',
   });
 
+  // Permissive limiter for the availability endpoint — protects against
+  // abusive polling without impacting legitimate page-load traffic.
+  const availabilityRateLimit = rateLimit({
+    windowMs: APPOINTMENT_RATE_LIMIT_WINDOW_MS,
+    max: AVAILABILITY_RATE_LIMIT_MAX,
+    message: { error: 'Too many requests, please try again later.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+    skip: () => process.env.NODE_ENV === 'test',
+  });
+
   const calendarService =
     process.env.GOOGLE_CALENDAR_ID &&
     process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL &&
@@ -173,7 +185,7 @@ export function createAppointmentRouter(): IRouter {
     process.env.CONTACT_OWNER_EMAIL ?? '',
   );
 
-  router.get('/availability', async (_req: Request, res: Response) => {
+  router.get('/availability', availabilityRateLimit, async (_req: Request, res: Response) => {
     const from = new Date();
     const to = new Date();
     to.setMonth(to.getMonth() + BOOKING_WINDOW_MONTHS);
