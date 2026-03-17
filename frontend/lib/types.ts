@@ -32,7 +32,8 @@ export interface Testimonial {
 
 export interface ContactInfo {
   addressLine1: string;
-  addressLine2: string;
+  postalCode: string;
+  city: string;
   phone: string;
   email: string;
   hours: { dayKey: string; time: string }[];

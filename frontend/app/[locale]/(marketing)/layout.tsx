@@ -30,8 +30,8 @@ const professionalServiceSchema = {
   address: {
     '@type': 'PostalAddress',
     streetAddress: CONTACT_INFO.addressLine1,
-    addressLocality: 'Amsterdam',
-    postalCode: '1234 AB',
+    addressLocality: CONTACT_INFO.city,
+    postalCode: CONTACT_INFO.postalCode,
     addressCountry: 'NL',
   },
   geo: {
