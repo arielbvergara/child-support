@@ -15,6 +15,11 @@ interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
+function escapeForJsonLd(value: string): string {
+  // Escape characters that could break out of a <script> tag when JSON-stringified
+  return value.replace(/</g, '\\u003c');
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   return createMetadata('home', locale as Locale, {
@@ -30,10 +35,15 @@ export default async function HomePage({ params }: PageProps) {
   const tFaq = await getTranslations({ locale, namespace: 'faq' });
 
   const faqSchema = buildFaqPageSchema(
-    FAQ_ITEM_KEYS.map((key) => ({
-      question: tFaq(`items.${key}.question`),
-      answer: tFaq(`items.${key}.answer`),
-    })),
+    FAQ_ITEM_KEYS.map((key) => {
+      const question = tFaq(`items.${key}.question`);
+      const answer = tFaq(`items.${key}.answer`);
+
+      return {
+        question: escapeForJsonLd(question),
+        answer: escapeForJsonLd(answer),
+      };
+    }),
   );
 
   return (
