@@ -1,10 +1,18 @@
 import type { MetadataRoute } from 'next';
-import { SITE_CONFIG } from '@/lib/constants';
+import { SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
+
+const serviceEntries = SERVICE_PAGES.map((service) => ({
+  path: `/services/${service.slug}`,
+  priority: 0.9,
+  changeFrequency: 'monthly' as const,
+}));
 
 const INDEXABLE_PAGES = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/make-an-appointment', priority: 0.7, changeFrequency: 'monthly' as const },
+  ...serviceEntries,
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
