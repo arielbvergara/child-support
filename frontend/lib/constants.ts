@@ -22,6 +22,8 @@ export const NAV_LINKS: NavLink[] = [
 export const SCHEDULE_CONFIG = {
   SLOT_DURATION_MINUTES: 60,
   BOOKING_WINDOW_MONTHS: 2,
+  /** IANA timezone used by the backend for slot generation and event creation. */
+  BUSINESS_TIMEZONE: 'Europe/Amsterdam',
   WORKING_SCHEDULE: [
     { days: [1, 2, 3, 4, 5] as number[], start: '09:00', end: '17:00' },
     { days: [6] as number[], start: '10:00', end: '14:00' },

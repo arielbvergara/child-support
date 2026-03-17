@@ -30,27 +30,41 @@ const INITIAL_FORM_DATA: FormData = {
 // Offset by day index to get Sun=0, Mon=1, …, Sat=6.
 const REFERENCE_SUNDAY = new Date(2024, 0, 7);
 
+/**
+ * Returns a YYYY-MM-DD key for the given date interpreted in the business timezone.
+ * Using the business timezone (instead of the visitor's browser timezone) ensures that
+ * slots are always bucketed under the correct calendar day, regardless of where the
+ * visitor is located. The en-CA locale produces a reliable YYYY-MM-DD format.
+ */
 function toDateKey(date: Date): string {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: SCHEDULE_CONFIG.BUSINESS_TIMEZONE,
+  }).format(date);
 }
 
+/**
+ * Formats a slot time in the business timezone so the displayed time always matches
+ * the Amsterdam local time that was booked — independent of the visitor's browser timezone.
+ */
 function formatTime(isoString: string, locale: string): string {
   return new Date(isoString).toLocaleTimeString(locale, {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
+    timeZone: SCHEDULE_CONFIG.BUSINESS_TIMEZONE,
   });
 }
 
+/**
+ * Formats a slot date in the business timezone for the same reason as formatTime.
+ */
 function formatDate(isoString: string, locale: string): string {
   return new Date(isoString).toLocaleDateString(locale, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: SCHEDULE_CONFIG.BUSINESS_TIMEZONE,
   });
 }
 
