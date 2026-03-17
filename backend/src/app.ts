@@ -49,7 +49,10 @@ export function createApp(configureRoutes?: (app: Application) => void): Applica
     }),
   );
 
-  app.use(express.json());
+  // Limit request bodies to 10 KB to mitigate DoS via oversized JSON payloads.
+  // All valid contact/appointment payloads are well under 4 KB, so this limit
+  // provides a safety margin without affecting legitimate clients.
+  app.use(express.json({ limit: '10kb' }));
   app.use('/health', healthRouter);
 
   const contactRateLimit = rateLimit({
@@ -79,13 +82,26 @@ export function createApp(configureRoutes?: (app: Application) => void): Applica
   // other error-handling middleware so it can capture unhandled errors.
   Sentry.setupExpressErrorHandler(app);
 
+  // Generic error handler.
+  // Express middleware errors (e.g. body-parser's 413 for oversized requests)
+  // carry a `.status` property. Forward that status for 4xx client errors so
+  // that meaningful codes are returned instead of always returning 500.
+  // Server errors (5xx) are always normalised to 500 in production to avoid
+  // leaking implementation details.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
     console.error('Unhandled error:', err.message);
     const isDev = process.env.NODE_ENV === 'development';
-    res.status(500).json({
-      error: isDev ? err.message : 'Internal Server Error',
-    });
+    // Only forward the error's status for 4xx client errors — these come from
+    // trusted middleware (e.g. body-parser) and represent client mistakes, not
+    // server failures.  Anything else is normalised to 500.
+    const isClientError = typeof err.status === 'number' && err.status >= 400 && err.status < 500;
+    const statusCode = isClientError ? err.status! : 500;
+    // Expose the error message for client errors (4xx) or in development;
+    // return a generic message for server errors in production to avoid
+    // leaking internal implementation details.
+    const message = isDev || isClientError ? err.message : 'Internal Server Error';
+    res.status(statusCode).json({ error: message });
   });
 
   return app;

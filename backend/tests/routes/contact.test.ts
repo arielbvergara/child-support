@@ -124,6 +124,18 @@ describe('POST /contact', () => {
     );
   });
 
+  it('sendContact_ShouldReturn413_WhenRequestBodyExceedsSizeLimit', async () => {
+    // Verifies the express.json({ limit: '10kb' }) guard rejects oversized
+    // payloads before they reach route handlers (DoS / memory-exhaustion mitigation).
+    const oversizedPayload = 'X'.repeat(11 * 1024); // 11 KB > 10 KB limit
+    const res = await request(app)
+      .post('/contact')
+      .set('Content-Type', 'application/json')
+      .send(`{"name":"a","email":"a@b.com","message":"${oversizedPayload}"}`);
+
+    expect(res.status).toBe(413);
+  });
+
   it('sendContact_ShouldReturn200_WhenEmailFailsButSheetsSucceeds', async () => {
     mockSend.mockRejectedValue(new Error('Resend API error'));
     const res = await request(app).post('/contact').send(validBody);

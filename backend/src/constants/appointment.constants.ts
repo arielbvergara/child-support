@@ -3,6 +3,10 @@ export const APPOINTMENT_ROUTE_PATH = '/appointments';
 export const APPOINTMENT_RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
 export const APPOINTMENT_RATE_LIMIT_MAX = 3; // max 3 bookings per window per IP
 
+// Availability is fetched on every page load, so its limit is intentionally
+// more permissive than the booking limit while still preventing abuse.
+export const AVAILABILITY_RATE_LIMIT_MAX = 60; // max 60 checks per window per IP
+
 export const SLOT_DURATION_MINUTES = 60;
 export const BOOKING_WINDOW_MONTHS = 2;
 

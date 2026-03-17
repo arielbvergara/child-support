@@ -62,7 +62,9 @@ export function createSheetsService(
       payload.message,
     ];
 
-    const url = `${SHEETS_API_BASE}/${sheetId}/values/${encodeURIComponent(SHEETS_RANGE)}:append?valueInputOption=USER_ENTERED`;
+    // RAW prevents Google Sheets from interpreting cell values as formulas,
+    // guarding against formula/CSV injection (e.g. =IMPORTDATA(...) in user input).
+    const url = `${SHEETS_API_BASE}/${sheetId}/values/${encodeURIComponent(SHEETS_RANGE)}:append?valueInputOption=RAW`;
 
     const response = await fetch(url, {
       method: 'POST',
