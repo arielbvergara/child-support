@@ -1,7 +1,8 @@
 import request from 'supertest';
 import { Resend } from 'resend';
 import app from '../../src/app';
-import { APPOINTMENT_VALIDATION, BOOKING_WINDOW_MONTHS } from '../../src/constants/appointment.constants';
+import { APPOINTMENT_VALIDATION, BOOKING_WINDOW_MONTHS, BUSINESS_TIMEZONE } from '../../src/constants/appointment.constants';
+import { createSlotInTimezone } from '../../src/services/calendar.service';
 import { CONTACT_VALIDATION } from '../../src/constants/contact.constants';
 
 jest.mock('resend');
@@ -232,6 +233,31 @@ describe('POST /appointments', () => {
 
     expect(res.status).toBe(422);
     expect(res.body.errors).toContainEqual(expect.objectContaining({ field: 'datetime' }));
+  });
+
+  it('createAppointment_ShouldReturn200_WhenDatetimeIsLastSlotOnBookingWindowBoundaryDay', async () => {
+    // Without the end-of-day fix, bookingWindowEnd = now + BOOKING_WINDOW_MONTHS at the current
+    // time-of-day. A slot at 16:00 Amsterdam on that same day (which is the last valid weekday
+    // slot) would be rejected if the test runs before 16:00 UTC. With the fix, bookingWindowEnd
+    // is extended to UTC 23:59:59.999, so all working-hour slots on the boundary day are accepted.
+
+    // Compute the boundary date using UTC month arithmetic to avoid local-time boundary issues.
+    const boundary = new Date();
+    boundary.setUTCMonth(boundary.getUTCMonth() + BOOKING_WINDOW_MONTHS);
+
+    // Walk back to the nearest Mon–Fri weekday (UTC day) so the slot passes the working-hours check.
+    while (boundary.getUTCDay() === 0 || boundary.getUTCDay() === 6) {
+      boundary.setUTCDate(boundary.getUTCDate() - 1);
+    }
+
+    // 16:00 Amsterdam is the last valid weekday slot (schedule end 17:00 − 60 min duration).
+    const lastSlot = createSlotInTimezone(boundary, 16, 0, BUSINESS_TIMEZONE);
+
+    const res = await request(app)
+      .post('/appointments')
+      .send({ ...validBody, datetime: lastSlot.toISOString() });
+
+    expect(res.status).toBe(200);
   });
 
   it('createAppointment_ShouldReturn503_WhenAvailabilityRecheckThrows', async () => {

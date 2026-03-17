@@ -98,9 +98,13 @@ function validateAppointmentBody(body: AppointmentRequestBody): {
     } else if (parsed <= new Date()) {
       errors.push({ field: 'datetime', message: 'Appointment must be scheduled in the future' });
     } else {
-      // Booking window check: must not exceed the same window used by /availability
+      // Booking window check: must not exceed the same window used by /availability.
+      // Extend to end-of-UTC-day so all working-hour slots on the last eligible day are
+      // accepted — slot generation includes every slot up to the schedule end (17:00
+      // Amsterdam = at most 16:00 UTC), which is always before UTC 23:59:59.
       const bookingWindowEnd = new Date();
       bookingWindowEnd.setMonth(bookingWindowEnd.getMonth() + BOOKING_WINDOW_MONTHS);
+      bookingWindowEnd.setUTCHours(23, 59, 59, 999);
       if (parsed > bookingWindowEnd) {
         errors.push({ field: 'datetime', message: `Appointment must be within ${BOOKING_WINDOW_MONTHS} months from today` });
       } else {
@@ -173,6 +177,9 @@ export function createAppointmentRouter(): IRouter {
     const from = new Date();
     const to = new Date();
     to.setMonth(to.getMonth() + BOOKING_WINDOW_MONTHS);
+    // Extend to end-of-UTC-day to match the booking window used in validateAppointmentBody,
+    // ensuring every slot on the last eligible day is included in availability.
+    to.setUTCHours(23, 59, 59, 999);
 
     if (!calendarService) {
       const slots = generateAllWorkingSlots(from, to);
