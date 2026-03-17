@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { Heading } from '@/components/ui/Heading';
 
-const FAQ_ITEM_KEYS = ['1', '2', '3', '4', '5'] as const;
+export const FAQ_ITEM_KEYS = ['1', '2', '3', '4', '5'] as const;
 
 export function Faq() {
   const t = useTranslations('faq');
