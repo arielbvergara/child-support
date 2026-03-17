@@ -1,4 +1,4 @@
-import type { Service, NavLink, Testimonial, ContactInfo, Credential } from './types';
+import type { Service, NavLink, Testimonial, ContactInfo, Credential, ServicePageConfig } from './types';
 
 export const SITE_CONFIG = {
   name: 'Pedagogisch Advies',
@@ -9,10 +9,41 @@ export const SITE_CONFIG = {
 
 export const NAV_LINKS: NavLink[] = [
   { labelKey: 'nav.home', href: '/' },
-  { labelKey: 'nav.services', href: '/#services' },
+  { labelKey: 'nav.services', href: '/services', dropdown: true },
   { labelKey: 'nav.about', href: '/about' },
   { labelKey: 'nav.contact', href: '/contact', hideDesktop: true },
   { labelKey: 'nav.bookConsultation', href: '/make-an-appointment', hideMobile: true },
+];
+
+export const SERVICE_PAGES: ServicePageConfig[] = [
+  {
+    id: 'individual',
+    slug: 'individual-consultation',
+    icon: 'Users',
+    online: true,
+    inPerson: true,
+  },
+  {
+    id: 'workshops',
+    slug: 'group-workshops',
+    icon: 'BookOpen',
+    online: true,
+    inPerson: true,
+  },
+  {
+    id: 'assessment',
+    slug: 'child-assessment',
+    icon: 'ClipboardList',
+    online: false,
+    inPerson: true,
+  },
+  {
+    id: 'school',
+    slug: 'school-educator-support',
+    icon: 'School',
+    online: true,
+    inPerson: true,
+  },
 ];
 
 /**

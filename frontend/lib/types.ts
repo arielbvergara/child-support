@@ -3,6 +3,15 @@ export interface NavLink {
   href: string;
   hideDesktop?: boolean;
   hideMobile?: boolean;
+  dropdown?: boolean;
+}
+
+export interface ServicePageConfig {
+  id: string;
+  slug: string;
+  icon: string;
+  online: boolean;
+  inPerson: boolean;
 }
 
 export interface Service {
