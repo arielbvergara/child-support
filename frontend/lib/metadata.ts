@@ -33,6 +33,26 @@ const PAGE_TITLES: Record<string, Record<Locale, string>> = {
     en: 'Make an Appointment — Pedagogy Professional',
     de: 'Termin vereinbaren — Pädagogin',
   },
+  'services/individual-consultation': {
+    nl: 'Individueel consult — Kind- en Gezinsbegeleiding',
+    en: 'Individual Consultation — Child & Family Development Support',
+    de: 'Einzelberatung — Kinder- und Familienbegleitung',
+  },
+  'services/group-workshops': {
+    nl: 'Groepsworkshops — Kind- en Gezinsbegeleiding',
+    en: 'Group Workshops — Child & Family Development Support',
+    de: 'Gruppenworkshops — Kinder- und Familienbegleitung',
+  },
+  'services/child-assessment': {
+    nl: 'Kinderbeoordeling — Kind- en Gezinsbegeleiding',
+    en: 'Child Assessment — Child & Family Development Support',
+    de: 'Kinderbeurteilung — Kinder- und Familienbegleitung',
+  },
+  'services/school-educator-support': {
+    nl: 'School- en leerkrachtbegeleiding — Kind- en Gezinsbegeleiding',
+    en: 'School & Educator Support — Child & Family Development Support',
+    de: 'Schul- und Lehrerbegleitung — Kinder- und Familienbegleitung',
+  },
 };
 
 const PAGE_DESCRIPTIONS: Record<string, Record<Locale, string>> = {
@@ -65,6 +85,26 @@ const PAGE_DESCRIPTIONS: Record<string, Record<Locale, string>> = {
     nl: 'Maak eenvoudig een afspraak online. Kies een datum en tijdstip dat u uitkomt.',
     en: 'Book a consultation online. Choose a date and time that works for you.',
     de: 'Buchen Sie online eine Beratung. Wählen Sie ein Datum und eine Uhrzeit.',
+  },
+  'services/individual-consultation': {
+    nl: 'Persoonlijke pedagogische consulten voor ouders en gezinnen. Praktische begeleiding afgestemd op de unieke behoeften van uw kind.',
+    en: 'One-on-one pedagogical consultations for parents and families. Practical guidance tailored to your child\'s unique needs.',
+    de: 'Persönliche pädagogische Beratung für Eltern und Familien. Praktische Unterstützung, zugeschnitten auf die einzigartigen Bedürfnisse Ihres Kindes.',
+  },
+  'services/group-workshops': {
+    nl: 'Interactieve workshops over opvoeding en kinderontwikkeling in kleine groepen. Leer bewezen strategieën samen met andere gezinnen.',
+    en: 'Interactive parenting and child development workshops in small groups. Learn evidence-based strategies alongside other families.',
+    de: 'Interaktive Workshops zu Erziehung und Kinderentwicklung in kleinen Gruppen. Lernen Sie bewährte Strategien gemeinsam mit anderen Familien.',
+  },
+  'services/child-assessment': {
+    nl: 'Professionele ontwikkelingsbeoordelingen voor kinderen. Uitgebreid inzicht in de sterktes en ontwikkelpunten van uw kind.',
+    en: 'Professional developmental assessments for children. Detailed insights into your child\'s strengths and areas for growth.',
+    de: 'Professionelle Entwicklungsbeurteilungen für Kinder. Fundierte Einblicke in die Stärken und Entwicklungsbereiche Ihres Kindes.',
+  },
+  'services/school-educator-support': {
+    nl: 'Pedagogische ondersteuning voor scholen, leerkrachten en onderwijsinstellingen. Praktische strategieën voor klassenmanagement en kinderontwikkeling.',
+    en: 'Pedagogical support for schools, teachers, and educational institutions. Practical strategies for classroom management and child development.',
+    de: 'Pädagogische Unterstützung für Schulen, Lehrkräfte und Bildungseinrichtungen. Praktische Strategien für Klassenmanagement und Kinderentwicklung.',
   },
 };
 
