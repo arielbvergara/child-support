@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Menu, Globe } from 'lucide-react';
+import { Menu, Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { MobileMenu } from './MobileMenu';
-import { NAV_LINKS, SITE_CONFIG } from '@/lib/constants';
+import { NAV_LINKS, SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
 import { clsx } from 'clsx';
 
 interface HeaderProps {
@@ -90,8 +90,51 @@ export function Header({ locale }: HeaderProps) {
           {/* Desktop nav */}
           <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
             {NAV_LINKS.filter(x => !x.hideDesktop).map((link) => {
+              if (link.dropdown) {
+                const isServicesActive = pathname.startsWith(`/${locale}/services`);
+                return (
+                  <div key={link.href} className="group relative">
+                    <button
+                      type="button"
+                      aria-haspopup="true"
+                      className={clsx(
+                        'flex cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                        isServicesActive
+                          ? 'bg-primary-light font-semibold text-primary'
+                          : 'text-warm-700 hover:bg-primary-light/50 hover:text-primary'
+                      )}
+                    >
+                      {t(link.labelKey)}
+                      <ChevronDown
+                        className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                        aria-hidden="true"
+                      />
+                    </button>
+                    <div className="absolute left-0 top-full z-50 mt-1 hidden w-60 rounded-xl border border-border bg-surface py-2 shadow-lg group-hover:block group-focus-within:block">
+                      {SERVICE_PAGES.map((service) => {
+                        const serviceHref = `/${locale}/services/${service.slug}`;
+                        const isServiceActive = pathname === serviceHref;
+                        return (
+                          <Link
+                            key={service.slug}
+                            href={serviceHref}
+                            className={clsx(
+                              'block px-4 py-2.5 text-sm transition-colors',
+                              isServiceActive
+                                ? 'bg-primary-light font-semibold text-primary'
+                                : 'text-warm-700 hover:bg-primary-light hover:text-primary'
+                            )}
+                          >
+                            {t(`services.${service.id}.title`)}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              }
+
               const [linkBasePath, linkHash] = link.href.split('#');
-              // Build href: include base path for anchors, consistent with footer logic
               const href = linkHash
                 ? `/${locale}${linkBasePath === '/' ? '' : linkBasePath}#${linkHash}`
                 : `/${locale}${linkBasePath === '/' ? '' : linkBasePath}`;

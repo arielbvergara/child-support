@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
-import { NAV_LINKS } from '@/lib/constants';
+import { NAV_LINKS, SERVICE_PAGES } from '@/lib/constants';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -18,6 +18,7 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
   const t = useTranslations();
   const pathname = usePathname();
+  const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
   // Close on ESC key
   useEffect(() => {
@@ -80,6 +81,54 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
             <nav className="flex-1 overflow-y-auto p-6">
               <ul className="space-y-1">
                 {NAV_LINKS.filter(x => !x.hideMobile).map((link) => {
+                  if (link.dropdown) {
+                    const isServicesActive = pathname.startsWith(`/${locale}/services`);
+                    return (
+                      <li key={link.href}>
+                        <button
+                          type="button"
+                          onClick={() => setIsServicesExpanded((prev) => !prev)}
+                          className={`flex w-full cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
+                            isServicesActive
+                              ? 'bg-primary-light text-primary'
+                              : 'text-warm-700 hover:bg-warm-100 hover:text-foreground'
+                          }`}
+                        >
+                          {t(link.labelKey)}
+                          <ChevronDown
+                            className={`h-4 w-4 transition-transform duration-200 ${
+                              isServicesExpanded ? 'rotate-180' : ''
+                            }`}
+                            aria-hidden="true"
+                          />
+                        </button>
+                        {isServicesExpanded && (
+                          <ul className="mt-1 space-y-0.5 pl-4">
+                            {SERVICE_PAGES.map((service) => {
+                              const serviceHref = `/${locale}/services/${service.slug}`;
+                              const isServiceActive = pathname === serviceHref;
+                              return (
+                                <li key={service.slug}>
+                                  <Link
+                                    href={serviceHref}
+                                    onClick={onClose}
+                                    className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                                      isServiceActive
+                                        ? 'bg-primary-light text-primary'
+                                        : 'text-warm-700 hover:bg-warm-100 hover:text-foreground'
+                                    }`}
+                                  >
+                                    {t(`services.${service.id}.title`)}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        )}
+                      </li>
+                    );
+                  }
+
                   const href = `/${locale}${link.href === '/' ? '' : link.href}`;
                   const isActive = pathname === href || (link.href === '/' && pathname === `/${locale}`);
                   return (
