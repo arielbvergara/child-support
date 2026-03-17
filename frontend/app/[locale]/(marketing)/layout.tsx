@@ -15,6 +15,15 @@ const websiteSchema = {
   inLanguage: ['nl', 'en', 'de'],
 };
 
+const personStubSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_CONFIG.siteUrl}/#person`,
+  name: 'Pedagogisch Adviseur',
+  url: `${SITE_CONFIG.siteUrl}/about`,
+  worksFor: { '@id': `${SITE_CONFIG.siteUrl}/#business` },
+};
+
 const professionalServiceSchema = {
   '@context': 'https://schema.org',
   '@type': ['ProfessionalService', 'LocalBusiness'],
@@ -126,6 +135,7 @@ export default async function MarketingLayout({
     <>
       <JsonLd schema={websiteSchema} />
       <JsonLd schema={professionalServiceSchema} />
+      <JsonLd schema={personStubSchema} />
       <SkipLink />
       <Header locale={locale} />
       <main id="main-content" tabIndex={-1}>
