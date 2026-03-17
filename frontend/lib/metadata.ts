@@ -28,6 +28,11 @@ const PAGE_TITLES: Record<string, Record<Locale, string>> = {
     en: 'Terms of Service',
     de: 'Nutzungsbedingungen',
   },
+  appointment: {
+    nl: 'Maak een afspraak — Pedagoog',
+    en: 'Make an Appointment — Pedagogy Professional',
+    de: 'Termin vereinbaren — Pädagogin',
+  },
 };
 
 const PAGE_DESCRIPTIONS: Record<string, Record<Locale, string>> = {
@@ -55,6 +60,11 @@ const PAGE_DESCRIPTIONS: Record<string, Record<Locale, string>> = {
     nl: 'Lees onze algemene voorwaarden voor het gebruik van onze diensten.',
     en: 'Read the terms and conditions for using our child development support services.',
     de: 'Lesen Sie die Nutzungsbedingungen für unsere pädagogischen Beratungsleistungen.',
+  },
+  appointment: {
+    nl: 'Maak eenvoudig een afspraak online. Kies een datum en tijdstip dat u uitkomt.',
+    en: 'Book a consultation online. Choose a date and time that works for you.',
+    de: 'Buchen Sie online eine Beratung. Wählen Sie ein Datum und eine Uhrzeit.',
   },
 };
 

@@ -79,7 +79,7 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
             {/* Nav links */}
             <nav className="flex-1 overflow-y-auto p-6">
               <ul className="space-y-1">
-                {NAV_LINKS.map((link) => {
+                {NAV_LINKS.filter(x => !x.hideMobile).map((link) => {
                   const href = `/${locale}${link.href === '/' ? '' : link.href}`;
                   const isActive = pathname === href || (link.href === '/' && pathname === `/${locale}`);
                   return (
@@ -104,7 +104,7 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
             {/* CTA */}
             <div className="border-t border-border p-6">
               <Button
-                href={`/${locale}/contact`}
+                href={`/${locale}/make-an-appointment`}
                 variant="primary"
                 size="md"
                 className="w-full"

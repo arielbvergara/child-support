@@ -11,8 +11,24 @@ export const NAV_LINKS: NavLink[] = [
   { labelKey: 'nav.home', href: '/' },
   { labelKey: 'nav.services', href: '/#services' },
   { labelKey: 'nav.about', href: '/about' },
-  { labelKey: 'nav.contact', href: '/contact' },
+  { labelKey: 'nav.contact', href: '/contact', hideDesktop: true },
+  { labelKey: 'nav.bookConsultation', href: '/make-an-appointment', hideMobile: true },
 ];
+
+/**
+ * Working schedule mirrored from the backend for display and slot validation purposes.
+ * dayOfWeek follows JS Date convention: 0 = Sunday, 1 = Monday, … 6 = Saturday.
+ */
+export const SCHEDULE_CONFIG = {
+  SLOT_DURATION_MINUTES: 60,
+  BOOKING_WINDOW_MONTHS: 2,
+  /** IANA timezone used by the backend for slot generation and event creation. */
+  BUSINESS_TIMEZONE: 'Europe/Amsterdam',
+  WORKING_SCHEDULE: [
+    { days: [1, 2, 3, 4, 5] as number[], start: '09:00', end: '17:00' },
+    { days: [6] as number[], start: '10:00', end: '14:00' },
+  ],
+} as const;
 
 export const SERVICES: Service[] = [
   {

@@ -15,6 +15,7 @@ export const HTTP_STATUS = {
   OK: 200,
   UNPROCESSABLE_ENTITY: 422,
   INTERNAL_SERVER_ERROR: 500,
+  SERVICE_UNAVAILABLE: 503,
 } as const;
 
 export const CONTACT_ROUTE_PATH = '/contact';

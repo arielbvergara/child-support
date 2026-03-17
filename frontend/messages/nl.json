@@ -249,5 +249,48 @@
     "learnMore": "Meer informatie",
     "backToHome": "Terug naar home",
     "skipToContent": "Sla over naar hoofdinhoud"
+  },
+  "appointment": {
+    "pageTitle": "Maak een afspraak",
+    "pageSubtitle": "Kies een datum en tijdstip dat u uitkomt",
+    "breadcrumb": "Maak een afspraak",
+    "form": {
+      "title": "Boek een consult",
+      "subtitle": "Kies een beschikbaar tijdslot en vul uw gegevens in. U ontvangt een bevestiging per e-mail.",
+      "stepDate": "1. Kies een datum",
+      "stepTime": "2. Kies een tijdstip",
+      "stepDetails": "3. Uw gegevens",
+      "selectedDate": "Geselecteerde datum",
+      "selectedTime": "Geselecteerd tijdstip",
+      "changeDate": "Datum wijzigen",
+      "notes": "Notities (optioneel)",
+      "notesPlaceholder": "Beschrijf kort wat u wilt bespreken…",
+      "name": "Volledige naam",
+      "namePlaceholder": "Uw naam",
+      "email": "E-mailadres",
+      "emailPlaceholder": "u@email.com",
+      "phone": "Telefoonnummer (optioneel)",
+      "phonePlaceholder": "+31 20 123 4567",
+      "service": "Ik ben geïnteresseerd in",
+      "serviceDefault": "Selecteer een dienst",
+      "serviceOptions": {
+        "individual": "Individueel consult",
+        "workshops": "Groepsworkshop",
+        "assessment": "Kinderbeoordeling",
+        "school": "School- en leerkrachtbegeleiding",
+        "other": "Overig / algemene vraag"
+      },
+      "submit": "Afspraak bevestigen",
+      "submitting": "Bezig met boeken…",
+      "privacy": "Uw gegevens worden vertrouwelijk behandeld en nooit gedeeld met derden.",
+      "successTitle": "Afspraak bevestigd!",
+      "successMessage": "Uw afspraak is geboekt. U ontvangt binnenkort een bevestigingsmail.",
+      "errorMessage": "Er is iets misgegaan. Probeer het opnieuw of neem direct contact op.",
+      "slotUnavailable": "Dit tijdslot is niet meer beschikbaar. Kies een ander tijdstip.",
+      "loadingSlots": "Beschikbare tijdslots worden geladen…",
+      "noSlotsAvailable": "Op dit moment zijn er geen beschikbare tijdslots. Neem direct contact op.",
+      "prevMonth": "Vorige maand",
+      "nextMonth": "Volgende maand"
+    }
   }
 }

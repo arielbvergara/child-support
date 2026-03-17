@@ -26,22 +26,28 @@ backend/
 │   ├── instrument.ts     # Sentry SDK initialisation (imported before all other modules)
 │   ├── app.ts            # App factory (createApp) — middleware, routes, and error handlers
 │   ├── constants/
-│   │   └── contact.constants.ts  # Contact route and rate-limit constants
+│   │   ├── appointment.constants.ts  # Appointment booking constants (working schedule, timezone, rate limits)
+│   │   └── contact.constants.ts      # Contact route and rate-limit constants
 │   ├── routes/
-│   │   ├── health.ts     # GET /health → { status: 'ok' }
-│   │   └── contact.ts    # POST /api/contact — contact form submission
+│   │   ├── appointment.ts  # GET /appointments/availability, POST /appointments
+│   │   ├── contact.ts      # POST /api/contact — contact form submission
+│   │   └── health.ts       # GET /health → { status: 'ok' }
 │   ├── services/
-│   │   ├── email.service.ts      # Resend email delivery
-│   │   └── sheets.service.ts     # Google Sheets logging
+│   │   ├── calendar.service.ts  # Google Calendar availability and event creation
+│   │   ├── email.service.ts     # Resend email delivery
+│   │   └── sheets.service.ts    # Google Sheets logging
 │   └── types/
+│       ├── appointment.types.ts  # Appointment booking TypeScript interfaces
 │       └── contact.types.ts      # Contact form TypeScript interfaces
 ├── tests/
 │   ├── health.test.ts            # /health endpoint tests
 │   ├── instrument.test.ts        # Sentry initialisation tests
 │   ├── sentry.middleware.test.ts # Sentry Express error handler tests
 │   ├── routes/
+│   │   ├── appointment.test.ts   # /appointments endpoint tests
 │   │   └── contact.test.ts       # /api/contact endpoint tests
 │   └── services/
+│       ├── calendar.service.test.ts
 │       ├── email.service.test.ts
 │       └── sheets.service.test.ts
 ├── Dockerfile            # Multi-stage production image (node:20-alpine)
@@ -95,10 +101,11 @@ cp .env.example .env
 | `ALLOWED_ORIGINS` | — | Comma-separated list of allowed CORS origins (required in production) |
 | `RESEND_API_KEY` | — | Resend API key for email delivery |
 | `RESEND_FROM_EMAIL` | — | Sender address for outgoing emails |
-| `CONTACT_OWNER_EMAIL` | — | Recipient address for contact form submissions |
+| `CONTACT_OWNER_EMAIL` | — | Recipient address for contact form and appointment notification emails |
 | `GOOGLE_SHEETS_ID` | — | Google Spreadsheet ID for contact form logging |
-| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | — | Google service account used for Sheets API access |
-| `GOOGLE_PRIVATE_KEY` | — | Private key for the Google service account (PEM format) |
+| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | — | Google service account email used for Sheets and Calendar API access |
+| `GOOGLE_PRIVATE_KEY` | — | Private key for the Google service account (PEM format, `\n`-escaped) |
+| `GOOGLE_CALENDAR_ID` | — | Calendar ID where appointment events are created. Use `primary` for the default calendar, or the calendar's email address for a dedicated one. The service account must be granted "Make changes to events" permission on this calendar. Omit to disable Calendar integration (availability shows all working-hour slots without conflict checking). |
 | `SENTRY_DSN` | — | Sentry DSN for runtime error reporting. Leave empty to disable Sentry locally. |
 
 ## Error Monitoring
@@ -114,6 +121,18 @@ Sentry is skipped entirely when `SENTRY_DSN` is not set, so local development wo
 | Method | Path | Description | Response |
 |---|---|---|---|
 | `GET` | `/health` | Health check | `{ "status": "ok" }` (200) |
+| `POST` | `/api/contact` | Contact form submission — validates input, logs to Google Sheets, and sends email notifications | `{ "success": true }` (200) or `{ "errors": [...] }` (422) |
+| `GET` | `/appointments/availability` | Returns available booking slots within the configured booking window. Uses Google Calendar when configured; falls back to all working-hour slots otherwise. | `{ "slots": [{ "datetime": "ISO string" }] }` (200) |
+| `POST` | `/appointments` | Books an appointment — validates payload, re-checks slot availability against Google Calendar, creates the calendar event, and sends confirmation emails | `{ "success": true }` (200), `{ "errors": [...] }` (422), or `{ "error": "..." }` (503) |
+
+### Appointment booking behaviour
+
+- **Working schedule** — weekdays 09:00–17:00 and Saturdays 10:00–14:00, Amsterdam time (`Europe/Amsterdam`). Submitted `datetime` values are validated against this schedule; off-hours or off-day requests receive a 422.
+- **Booking window** — slots are offered and accepted up to 2 months from today. Requests beyond the window receive a 422.
+- **Slot duration** — 60 minutes. The `datetime` must align to a slot boundary (e.g. 09:00, 10:00).
+- **Conflict check** — when Google Calendar is configured, the slot is re-checked immediately before confirming to prevent double-bookings. A transient Calendar API failure returns 503 so the client can retry safely.
+- **Availability cache** — availability results are cached in memory for 5 minutes and invalidated immediately after a successful booking to keep slot lists fresh.
+- **Rate limiting** — `POST /appointments` is limited to 5 requests per 15 minutes per IP. `GET /appointments/availability` is not rate-limited.
 
 ## Running Tests
 

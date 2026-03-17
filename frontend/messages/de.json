@@ -249,5 +249,48 @@
     "learnMore": "Mehr erfahren",
     "backToHome": "Zur Startseite",
     "skipToContent": "Zum Hauptinhalt springen"
+  },
+  "appointment": {
+    "pageTitle": "Termin vereinbaren",
+    "pageSubtitle": "Wählen Sie ein Datum und eine Uhrzeit, die Ihnen passt",
+    "breadcrumb": "Termin vereinbaren",
+    "form": {
+      "title": "Beratung buchen",
+      "subtitle": "Wählen Sie einen verfügbaren Termin und füllen Sie Ihre Daten aus. Sie erhalten eine Bestätigung per E-Mail.",
+      "stepDate": "1. Datum wählen",
+      "stepTime": "2. Uhrzeit wählen",
+      "stepDetails": "3. Ihre Angaben",
+      "selectedDate": "Ausgewähltes Datum",
+      "selectedTime": "Ausgewählte Uhrzeit",
+      "changeDate": "Datum ändern",
+      "notes": "Anmerkungen (optional)",
+      "notesPlaceholder": "Beschreiben Sie kurz, was Sie besprechen möchten…",
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "emailPlaceholder": "sie@email.com",
+      "phone": "Telefonnummer (optional)",
+      "phonePlaceholder": "+49 30 123 4567",
+      "service": "Ich interessiere mich für",
+      "serviceDefault": "Leistung auswählen",
+      "serviceOptions": {
+        "individual": "Einzelberatung",
+        "workshops": "Gruppenworkshop",
+        "assessment": "Kinderbeurteilung",
+        "school": "Schul- und Lehrerbegleitung",
+        "other": "Sonstiges / allgemeine Anfrage"
+      },
+      "submit": "Termin bestätigen",
+      "submitting": "Wird gebucht…",
+      "privacy": "Ihre Daten werden vertraulich behandelt und niemals an Dritte weitergegeben.",
+      "successTitle": "Termin bestätigt!",
+      "successMessage": "Ihr Termin wurde gebucht. Sie erhalten in Kürze eine Bestätigungs-E-Mail.",
+      "errorMessage": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+      "slotUnavailable": "Dieser Zeitslot ist nicht mehr verfügbar. Bitte wählen Sie einen anderen.",
+      "loadingSlots": "Verfügbare Zeitslots werden geladen…",
+      "noSlotsAvailable": "Derzeit sind keine Zeitslots verfügbar. Bitte kontaktieren Sie uns direkt.",
+      "prevMonth": "Vorheriger Monat",
+      "nextMonth": "Nächster Monat"
+    }
   }
 }

@@ -249,5 +249,48 @@
     "learnMore": "Learn more",
     "backToHome": "Back to home",
     "skipToContent": "Skip to main content"
+  },
+  "appointment": {
+    "pageTitle": "Make an Appointment",
+    "pageSubtitle": "Choose a date and time that works for you",
+    "breadcrumb": "Make an Appointment",
+    "form": {
+      "title": "Book a Consultation",
+      "subtitle": "Select an available slot and fill in your details. You will receive a confirmation by email.",
+      "stepDate": "1. Choose a date",
+      "stepTime": "2. Choose a time",
+      "stepDetails": "3. Your details",
+      "selectedDate": "Selected date",
+      "selectedTime": "Selected time",
+      "changeDate": "Change date",
+      "notes": "Notes (optional)",
+      "notesPlaceholder": "Briefly describe what you would like to discuss…",
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "email": "Email address",
+      "emailPlaceholder": "you@email.com",
+      "phone": "Phone number (optional)",
+      "phonePlaceholder": "+44 7700 900000",
+      "service": "I'm interested in",
+      "serviceDefault": "Select a service",
+      "serviceOptions": {
+        "individual": "Individual consultation",
+        "workshops": "Group workshop",
+        "assessment": "Child assessment",
+        "school": "School & educator support",
+        "other": "Other / general enquiry"
+      },
+      "submit": "Confirm Appointment",
+      "submitting": "Booking…",
+      "privacy": "Your details are treated confidentially and never shared with third parties.",
+      "successTitle": "Appointment confirmed!",
+      "successMessage": "Your appointment has been booked. You will receive a confirmation email shortly.",
+      "errorMessage": "Something went wrong. Please try again or contact us directly.",
+      "slotUnavailable": "This time slot is no longer available. Please choose another.",
+      "loadingSlots": "Loading available slots…",
+      "noSlotsAvailable": "No available slots at this time. Please contact us directly.",
+      "prevMonth": "Previous month",
+      "nextMonth": "Next month"
+    }
   }
 }

@@ -5,7 +5,9 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import healthRouter from './routes/health';
 import { createContactRouter } from './routes/contact';
+import { createAppointmentRouter } from './routes/appointment';
 import { CONTACT_RATE_LIMIT_MAX, CONTACT_RATE_LIMIT_WINDOW_MS, CONTACT_ROUTE_PATH } from './constants/contact.constants';
+import { APPOINTMENT_ROUTE_PATH } from './constants/appointment.constants';
 
 /**
  * Factory that creates and fully configures the Express application.
@@ -42,7 +44,7 @@ export function createApp(configureRoutes?: (app: Application) => void): Applica
   app.use(
     cors({
       origin: allowedOrigins,
-      methods: ['POST'],
+      methods: ['GET', 'POST'],
       allowedHeaders: ['Content-Type'],
     }),
   );
@@ -61,6 +63,11 @@ export function createApp(configureRoutes?: (app: Application) => void): Applica
 
   app.use(CONTACT_ROUTE_PATH, contactRateLimit);
   app.use(CONTACT_ROUTE_PATH, createContactRouter());
+
+  // The appointment booking rate limiter is applied only to POST /appointments
+  // (inside the router) so that GET /appointments/availability — called on every
+  // page load — is never throttled.
+  app.use(APPOINTMENT_ROUTE_PATH, createAppointmentRouter());
 
   // Allow callers (e.g. tests) to register additional routes before error
   // handlers so thrown errors flow through the full error-handling pipeline.

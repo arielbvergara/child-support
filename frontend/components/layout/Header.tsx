@@ -89,7 +89,7 @@ export function Header({ locale }: HeaderProps) {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Main navigation">
-            {NAV_LINKS.map((link) => {
+            {NAV_LINKS.filter(x => !x.hideDesktop).map((link) => {
               const [linkBasePath, linkHash] = link.href.split('#');
               // Build href: include base path for anchors, consistent with footer logic
               const href = linkHash
@@ -155,7 +155,7 @@ export function Header({ locale }: HeaderProps) {
               size="sm"
               className="hidden md:inline-flex"
             >
-              {t('nav.bookConsultation')}
+              {t('hero.ctaPrimary')}
             </Button>
 
             {/* Mobile CTA — visible on small screens before the hamburger */}

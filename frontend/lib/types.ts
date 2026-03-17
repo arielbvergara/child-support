@@ -1,6 +1,8 @@
 export interface NavLink {
   labelKey: string;
   href: string;
+  hideDesktop?: boolean;
+  hideMobile?: boolean;
 }
 
 export interface Service {
