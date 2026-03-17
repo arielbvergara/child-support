@@ -7,8 +7,9 @@ import { VideoEmbed } from '@/components/ui/VideoEmbed';
 import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { buildBreadcrumbSchema } from '@/lib/seo';
+import { createMetadata } from '@/lib/metadata';
 import { SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
-import type { ServicePageConfig } from '@/lib/types';
+import type { Locale, ServicePageConfig } from '@/lib/types';
 
 interface PageProps {
   params: Promise<{ locale: string; service: string }>;
@@ -18,34 +19,19 @@ export function generateStaticParams() {
   return SERVICE_PAGES.map((s) => ({ service: s.slug }));
 }
 
-const SITE_NAMES: Record<string, string> = {
-  nl: 'Kind- en Gezinsbegeleiding',
-  en: 'Child & Family Development Support',
-  de: 'Kinder- und Familienbegleitung',
-};
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, service } = await params;
   const serviceConfig = SERVICE_PAGES.find((s) => s.slug === service);
   if (!serviceConfig) return {};
 
-  const t = await getTranslations({ locale, namespace: `servicePage.${serviceConfig.id}` });
-  const tService = await getTranslations({ locale, namespace: `services.${serviceConfig.id}` });
-  const siteName = SITE_NAMES[locale] ?? SITE_NAMES.nl;
-  const title = `${tService('title')} — ${siteName}`;
-  const description = t('tagline');
-
-  return {
-    title,
-    description,
-    openGraph: { title, description },
+  return createMetadata(`services/${service}`, locale as Locale, {
     alternates: {
       canonical: `/${locale}/services/${service}`,
       languages: Object.fromEntries(
         SITE_CONFIG.locales.map((l) => [l, `/${l}/services/${service}`])
       ),
     },
-  };
+  });
 }
 
 const BREADCRUMB_LABELS: Record<string, { services: string }> = {
