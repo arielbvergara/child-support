@@ -88,6 +88,8 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
                         <button
                           type="button"
                           onClick={() => setIsServicesExpanded((prev) => !prev)}
+                          aria-expanded={isServicesExpanded}
+                          aria-controls="services-mobile-menu"
                           className={`flex w-full cursor-pointer items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors ${
                             isServicesActive
                               ? 'bg-primary-light text-primary'
@@ -103,7 +105,7 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
                           />
                         </button>
                         {isServicesExpanded && (
-                          <ul className="mt-1 space-y-0.5 pl-4">
+                          <ul id="services-mobile-menu" className="mt-1 space-y-0.5 pl-4">
                             {SERVICE_PAGES.map((service) => {
                               const serviceHref = `/${locale}/services/${service.slug}`;
                               const isServiceActive = pathname === serviceHref;

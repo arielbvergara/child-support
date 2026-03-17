@@ -88,7 +88,7 @@ export function ServicesOverview({ locale }: ServicesOverviewProps) {
 
               <Link
                 href={`/${locale}/services/${serviceSlugMap[service.id]}`}
-                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary-hover after:absolute after:inset-0 after:rounded-2xl"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary-hover after:absolute after:inset-0 after:rounded-2xl after:content-['']"
               >
                 {t('services.learnMore')}
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />

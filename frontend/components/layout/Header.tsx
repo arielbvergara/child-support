@@ -26,6 +26,7 @@ export function Header({ locale }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState('');
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -93,10 +94,21 @@ export function Header({ locale }: HeaderProps) {
               if (link.dropdown) {
                 const isServicesActive = pathname.startsWith(`/${locale}/services`);
                 return (
-                  <div key={link.href} className="group relative">
+                  <div
+                    key={link.href}
+                    className="group relative"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                    onFocusCapture={() => setIsServicesOpen(true)}
+                    onBlurCapture={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsServicesOpen(false);
+                    }}
+                  >
                     <button
                       type="button"
-                      aria-haspopup="true"
+                      aria-haspopup="menu"
+                      aria-expanded={isServicesOpen}
+                      aria-controls="services-desktop-menu"
                       className={clsx(
                         'flex cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                         isServicesActive
@@ -110,7 +122,7 @@ export function Header({ locale }: HeaderProps) {
                         aria-hidden="true"
                       />
                     </button>
-                    <div className="absolute left-0 top-full z-50 mt-1 hidden w-60 rounded-xl border border-border bg-surface py-2 shadow-lg group-hover:block group-focus-within:block">
+                    <div id="services-desktop-menu" role="menu" className="absolute left-0 top-full z-50 mt-1 hidden w-60 rounded-xl border border-border bg-surface py-2 shadow-lg group-hover:block group-focus-within:block">
                       {SERVICE_PAGES.map((service) => {
                         const serviceHref = `/${locale}/services/${service.slug}`;
                         const isServiceActive = pathname === serviceHref;
@@ -118,6 +130,7 @@ export function Header({ locale }: HeaderProps) {
                           <Link
                             key={service.slug}
                             href={serviceHref}
+                            role="menuitem"
                             className={clsx(
                               'block px-4 py-2.5 text-sm transition-colors',
                               isServiceActive
