@@ -164,8 +164,8 @@ export function Header({ locale }: HeaderProps) {
               const isActive = isAnchorLink
                 ? pathname === localizedBase && currentHash === `#${linkHash}`
                 : link.href === '/'
-                  ? pathname === `/${locale}` && !anchorNavActive
-                  : pathname === `/${locale}${link.href}`;
+                  ? pathname === localizedBase && !anchorNavActive
+                  : pathname === localizedBase;
               return (
                 <Link
                   key={link.href}
