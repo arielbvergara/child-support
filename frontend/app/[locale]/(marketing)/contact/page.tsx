@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { ContactInfo } from '@/components/sections/contact/ContactInfo';
-import { ContactFormSection } from '@/components/sections/contact/ContactFormSection';
+import { ContactForm } from '@/components/ui/ContactForm';
+import { FormSection } from '@/components/ui/FormSection';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { createMetadata } from '@/lib/metadata';
@@ -42,6 +43,15 @@ function PageHero() {
   );
 }
 
+function ContactFormContent() {
+  const t = useTranslations('contact.form');
+  return (
+    <FormSection title={t('title')}>
+      <ContactForm />
+    </FormSection>
+  );
+}
+
 export default async function ContactPage({ params }: PageProps) {
   const { locale } = await params;
   const names = BREADCRUMB_NAMES[locale] ?? BREADCRUMB_NAMES.nl;
@@ -61,7 +71,7 @@ export default async function ContactPage({ params }: PageProps) {
             <ContactInfo />
           </div>
           <div className="lg:col-span-3">
-            <ContactFormSection />
+            <ContactFormContent />
           </div>
         </div>
       </SectionWrapper>

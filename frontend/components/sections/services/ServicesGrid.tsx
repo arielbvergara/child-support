@@ -10,11 +10,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
-import { SERVICES, SERVICE_PAGES } from '@/lib/constants';
-
-const serviceSlugMap = Object.fromEntries(
-  SERVICE_PAGES.map((s) => [s.id, s.slug]),
-);
+import { SERVICE_CATALOG } from '@/lib/constants';
 
 const iconMap = {
   Users,
@@ -41,7 +37,7 @@ export function ServicesGrid({ locale, ctaLabel }: ServicesGridProps) {
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {SERVICES.map((service, index) => {
+      {SERVICE_CATALOG.map((service, index) => {
         const Icon = iconMap[service.icon as keyof typeof iconMap] ?? Users;
         const iconColor = iconColorClasses[index % iconColorClasses.length];
 
@@ -76,7 +72,7 @@ export function ServicesGrid({ locale, ctaLabel }: ServicesGridProps) {
             </p>
 
             <Link
-              href={`/${locale}/services/${serviceSlugMap[service.id]}`}
+              href={`/${locale}/services/${service.slug}`}
               aria-label={`${ctaLabel} — ${t(service.titleKey as Parameters<typeof t>[0])}`}
               className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors hover:text-primary-hover after:absolute after:inset-0 after:rounded-2xl after:content-['']"
             >

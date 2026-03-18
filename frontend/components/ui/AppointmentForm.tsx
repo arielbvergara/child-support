@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { ChevronLeft, ChevronRight, CheckCircle, Clock } from 'lucide-react';
 import { Button } from './Button';
-import { SCHEDULE_CONFIG } from '@/lib/constants';
+import { SCHEDULE_CONFIG, SERVICE_CATALOG } from '@/lib/constants';
 
 type TimeSlot = {
   datetime: string;
@@ -30,6 +30,11 @@ const INITIAL_FORM_DATA: FormData = {
 // Reference Sunday (2024-01-07) used to derive locale-aware day-of-week labels.
 // Offset by day index to get Sun=0, Mon=1, …, Sat=6.
 const REFERENCE_SUNDAY = new Date(2024, 0, 7);
+
+const INPUT_CLASS =
+  'w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20';
+const SELECT_CLASS =
+  'w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20';
 
 /**
  * Returns a YYYY-MM-DD key for the given date interpreted in the business timezone.
@@ -461,7 +466,7 @@ export function AppointmentForm() {
                   placeholder={t('namePlaceholder')}
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className={INPUT_CLASS}
                 />
               </div>
 
@@ -479,7 +484,7 @@ export function AppointmentForm() {
                   placeholder={t('emailPlaceholder')}
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className={INPUT_CLASS}
                 />
               </div>
             </div>
@@ -496,7 +501,7 @@ export function AppointmentForm() {
                 placeholder={t('phonePlaceholder')}
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className={INPUT_CLASS}
               />
             </div>
 
@@ -510,13 +515,12 @@ export function AppointmentForm() {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className={SELECT_CLASS}
               >
                 <option value="">{t('serviceDefault')}</option>
-                <option value="individual">{t('serviceOptions.individual')}</option>
-                <option value="workshops">{t('serviceOptions.workshops')}</option>
-                <option value="assessment">{t('serviceOptions.assessment')}</option>
-                <option value="school">{t('serviceOptions.school')}</option>
+                {SERVICE_CATALOG.map((s) => (
+                  <option key={s.id} value={s.id}>{t(`serviceOptions.${s.id}`)}</option>
+                ))}
                 <option value="other">{t('serviceOptions.other')}</option>
               </select>
             </div>
@@ -533,7 +537,7 @@ export function AppointmentForm() {
                 placeholder={t('notesPlaceholder')}
                 value={formData.notes}
                 onChange={handleChange}
-                className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className={`resize-y ${INPUT_CLASS}`}
               />
             </div>
 

@@ -1,4 +1,4 @@
-import type { Service, NavLink, Testimonial, ContactInfo, ProfessionalInfo, Credential, ServicePageConfig } from './types';
+import type { Service, NavLink, Testimonial, ContactInfo, ProfessionalInfo, Credential } from './types';
 
 export const SITE_CONFIG = {
   name: 'Pedagogisch Advies',
@@ -15,11 +15,13 @@ export const NAV_LINKS: NavLink[] = [
   { labelKey: 'nav.bookConsultation', href: '/make-an-appointment', hideMobile: true },
 ];
 
-export const SERVICE_PAGES: ServicePageConfig[] = [
+export const SERVICE_CATALOG: Service[] = [
   {
     id: 'individual',
     slug: 'individual-consultation',
     icon: 'Users',
+    titleKey: 'services.individual.title',
+    descriptionKey: 'services.individual.description',
     online: true,
     inPerson: true,
   },
@@ -27,6 +29,8 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
     id: 'workshops',
     slug: 'group-workshops',
     icon: 'BookOpen',
+    titleKey: 'services.workshops.title',
+    descriptionKey: 'services.workshops.description',
     online: true,
     inPerson: true,
   },
@@ -34,6 +38,8 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
     id: 'assessment',
     slug: 'child-assessment',
     icon: 'ClipboardList',
+    titleKey: 'services.assessment.title',
+    descriptionKey: 'services.assessment.description',
     online: false,
     inPerson: true,
   },
@@ -41,6 +47,8 @@ export const SERVICE_PAGES: ServicePageConfig[] = [
     id: 'school',
     slug: 'school-educator-support',
     icon: 'School',
+    titleKey: 'services.school.title',
+    descriptionKey: 'services.school.description',
     online: true,
     inPerson: true,
   },
@@ -61,40 +69,6 @@ export const SCHEDULE_CONFIG = {
   ],
 } as const;
 
-export const SERVICES: Service[] = [
-  {
-    id: 'individual',
-    icon: 'Users',
-    titleKey: 'services.individual.title',
-    descriptionKey: 'services.individual.description',
-    online: true,
-    inPerson: true,
-  },
-  {
-    id: 'workshops',
-    icon: 'BookOpen',
-    titleKey: 'services.workshops.title',
-    descriptionKey: 'services.workshops.description',
-    online: true,
-    inPerson: true,
-  },
-  {
-    id: 'assessment',
-    icon: 'ClipboardList',
-    titleKey: 'services.assessment.title',
-    descriptionKey: 'services.assessment.description',
-    online: false,
-    inPerson: true,
-  },
-  {
-    id: 'school',
-    icon: 'School',
-    titleKey: 'services.school.title',
-    descriptionKey: 'services.school.description',
-    online: true,
-    inPerson: true,
-  },
-];
 
 export const TESTIMONIALS: Testimonial[] = [
   {

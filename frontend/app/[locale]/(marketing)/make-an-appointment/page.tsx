@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
-import { AppointmentFormSection } from '@/components/sections/appointment/AppointmentFormSection';
+import { AppointmentForm } from '@/components/ui/AppointmentForm';
+import { FormSection } from '@/components/ui/FormSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { createMetadata } from '@/lib/metadata';
 import { buildBreadcrumbSchema } from '@/lib/seo';
@@ -48,6 +49,15 @@ function PageHero() {
   );
 }
 
+function AppointmentFormContent() {
+  const t = useTranslations('appointment.form');
+  return (
+    <FormSection title={t('title')} subtitle={t('subtitle')}>
+      <AppointmentForm />
+    </FormSection>
+  );
+}
+
 export default async function MakeAnAppointmentPage({ params }: PageProps) {
   const { locale } = await params;
   const names = BREADCRUMB_NAMES[locale] ?? BREADCRUMB_NAMES.nl;
@@ -63,7 +73,7 @@ export default async function MakeAnAppointmentPage({ params }: PageProps) {
       <PageHero />
       <SectionWrapper className="bg-white">
         <div className="mx-auto max-w-2xl">
-          <AppointmentFormSection />
+          <AppointmentFormContent />
         </div>
       </SectionWrapper>
     </>

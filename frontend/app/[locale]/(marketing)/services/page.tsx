@@ -4,7 +4,7 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { ServicesGrid } from '@/components/sections/services/ServicesGrid';
 import { createMetadata } from '@/lib/metadata';
 import { buildBreadcrumbSchema } from '@/lib/seo';
-import { SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
+import { SERVICE_CATALOG, SITE_CONFIG } from '@/lib/constants';
 import type { Locale } from '@/lib/types';
 
 interface PageProps {
@@ -42,7 +42,7 @@ function buildCollectionPageSchema(locale: string) {
     provider: { '@id': `${SITE_CONFIG.siteUrl}/#business` },
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: SERVICE_PAGES.map((s, i) => ({
+      itemListElement: SERVICE_CATALOG.map((s, i) => ({
         '@type': 'ListItem',
         position: i + 1,
         url: `${SITE_CONFIG.siteUrl}/${locale}/services/${s.slug}`,

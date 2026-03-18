@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from './Button';
 import { CheckCircle } from 'lucide-react';
+import { SERVICE_CATALOG } from '@/lib/constants';
 
 type FormData = {
   name: string;
@@ -12,6 +13,11 @@ type FormData = {
   service: string;
   message: string;
 };
+
+const INPUT_CLASS =
+  'w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20';
+const SELECT_CLASS =
+  'w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20';
 
 const INITIAL_FORM_DATA: FormData = {
   name: '',
@@ -94,7 +100,7 @@ export function ContactForm() {
             placeholder={t('namePlaceholder')}
             value={formData.name}
             onChange={handleChange}
-            className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className={INPUT_CLASS}
           />
         </div>
 
@@ -115,7 +121,7 @@ export function ContactForm() {
             placeholder={t('emailPlaceholder')}
             value={formData.email}
             onChange={handleChange}
-            className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className={INPUT_CLASS}
           />
         </div>
       </div>
@@ -135,7 +141,7 @@ export function ContactForm() {
           placeholder={t('phonePlaceholder')}
           value={formData.phone}
           onChange={handleChange}
-          className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className={INPUT_CLASS}
         />
       </div>
 
@@ -152,13 +158,12 @@ export function ContactForm() {
           name="service"
           value={formData.service}
           onChange={handleChange}
-          className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className={SELECT_CLASS}
         >
           <option value="">{t('serviceDefault')}</option>
-          <option value="individual">{t('serviceOptions.individual')}</option>
-          <option value="workshops">{t('serviceOptions.workshops')}</option>
-          <option value="assessment">{t('serviceOptions.assessment')}</option>
-          <option value="school">{t('serviceOptions.school')}</option>
+          {SERVICE_CATALOG.map((s) => (
+            <option key={s.id} value={s.id}>{t(`serviceOptions.${s.id}`)}</option>
+          ))}
           <option value="other">{t('serviceOptions.other')}</option>
         </select>
       </div>
@@ -180,7 +185,7 @@ export function ContactForm() {
           placeholder={t('messagePlaceholder')}
           value={formData.message}
           onChange={handleChange}
-          className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-3 text-foreground placeholder-warm-400 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className={`resize-y ${INPUT_CLASS}`}
         />
       </div>
 

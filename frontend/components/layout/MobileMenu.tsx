@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/Button';
-import { NAV_LINKS, SERVICE_PAGES } from '@/lib/constants';
+import { NAV_LINKS, SERVICE_CATALOG } from '@/lib/constants';
 import { getLocalizedPath } from '@/lib/pathnames';
 
 interface MobileMenuProps {
@@ -107,7 +107,7 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
                         </button>
                         {isServicesExpanded && (
                           <ul id="services-mobile-menu" className="mt-1 space-y-0.5 pl-4">
-                            {SERVICE_PAGES.map((service) => {
+                            {SERVICE_CATALOG.map((service) => {
                               const serviceHref = `/${locale}/services/${service.slug}`;
                               const isServiceActive = pathname === serviceHref;
                               return (

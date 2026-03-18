@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { NAV_LINKS, CONTACT_INFO, SITE_CONFIG } from '@/lib/constants';
+import { LogoIcon } from '@/components/ui/LogoIcon';
 
 interface FooterProps {
   locale: string;
@@ -18,21 +19,7 @@ export function Footer({ locale }: FooterProps) {
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                >
-                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2" />
-                  <path d="M12 8v4l3 3" />
-                </svg>
-              </div>
+              <LogoIcon className="bg-accent" />
               <span className="font-display text-lg font-bold text-white">
                 {SITE_CONFIG.name}
               </span>

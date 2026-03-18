@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
-import { SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
+import { SERVICE_CATALOG, SITE_CONFIG } from '@/lib/constants';
 import { getLocalizedPath } from '@/lib/pathnames';
 
-const serviceEntries = SERVICE_PAGES.map((service) => ({
+const serviceEntries = SERVICE_CATALOG.map((service) => ({
   path: `/services/${service.slug}`,
   priority: 0.9,
   changeFrequency: 'monthly' as const,

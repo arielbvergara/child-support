@@ -8,21 +8,21 @@ import { Button } from '@/components/ui/Button';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { buildBreadcrumbSchema } from '@/lib/seo';
 import { createMetadata } from '@/lib/metadata';
-import { SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
+import { SERVICE_CATALOG, SITE_CONFIG } from '@/lib/constants';
 import { getLocalizedPath } from '@/lib/pathnames';
-import type { Locale, ServicePageConfig } from '@/lib/types';
+import type { Locale, Service } from '@/lib/types';
 
 interface PageProps {
   params: Promise<{ locale: string; service: string }>;
 }
 
 export function generateStaticParams() {
-  return SERVICE_PAGES.map((s) => ({ service: s.slug }));
+  return SERVICE_CATALOG.map((s) => ({ service: s.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, service } = await params;
-  const serviceConfig = SERVICE_PAGES.find((s) => s.slug === service);
+  const serviceConfig = SERVICE_CATALOG.find((s) => s.slug === service);
   if (!serviceConfig) return {};
 
   return createMetadata(`services/${service}`, locale as Locale, {
@@ -70,7 +70,7 @@ function buildServiceSchema(
 }
 
 interface ServiceHeroProps {
-  serviceConfig: ServicePageConfig;
+  serviceConfig: Service;
   serviceId: string;
 }
 
@@ -193,7 +193,7 @@ function ServiceCta({ serviceId, locale }: ServiceCtaProps) {
 
 export default async function ServicePage({ params }: PageProps) {
   const { locale, service } = await params;
-  const serviceConfig = SERVICE_PAGES.find((s) => s.slug === service);
+  const serviceConfig = SERVICE_CATALOG.find((s) => s.slug === service);
   if (!serviceConfig) notFound();
 
   const t = await getTranslations({ locale, namespace: `servicePage.${serviceConfig.id}` });

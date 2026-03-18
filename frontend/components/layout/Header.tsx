@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Menu, Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { LogoIcon } from '@/components/ui/LogoIcon';
 import { MobileMenu } from './MobileMenu';
-import { NAV_LINKS, SERVICE_PAGES, SITE_CONFIG } from '@/lib/constants';
+import { NAV_LINKS, SERVICE_CATALOG, SITE_CONFIG } from '@/lib/constants';
 import { getLocalizedPath } from '@/lib/pathnames';
 import { clsx } from 'clsx';
 
@@ -69,21 +70,7 @@ export function Header({ locale }: HeaderProps) {
             href={`/${locale}`}
             className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded-md"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-5 w-5"
-                aria-hidden="true"
-              >
-                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2" />
-                <path d="M12 8v4l3 3" />
-              </svg>
-            </div>
+            <LogoIcon className="bg-primary" />
             <span className="font-display text-lg font-bold text-foreground hidden sm:block">
               {SITE_CONFIG.name}
             </span>
@@ -124,7 +111,7 @@ export function Header({ locale }: HeaderProps) {
                       />
                     </button>
                     <div id="services-desktop-menu" role="menu" className="absolute left-0 top-full z-50 mt-1 hidden w-60 rounded-xl border border-border bg-surface py-2 shadow-lg group-hover:block group-focus-within:block">
-                      {SERVICE_PAGES.map((service) => {
+                      {SERVICE_CATALOG.map((service) => {
                         const serviceHref = `/${locale}/services/${service.slug}`;
                         const isServiceActive = pathname === serviceHref;
                         return (

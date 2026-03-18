@@ -6,16 +6,9 @@ export interface NavLink {
   dropdown?: boolean;
 }
 
-export interface ServicePageConfig {
-  id: string;
-  slug: string;
-  icon: string;
-  online: boolean;
-  inPerson: boolean;
-}
-
 export interface Service {
   id: string;
+  slug: string;
   icon: string;
   titleKey: string;
   descriptionKey: string;
