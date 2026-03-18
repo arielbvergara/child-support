@@ -104,7 +104,7 @@ function validateAppointmentBody(body: AppointmentRequestBody): {
       // accepted — slot generation includes every slot up to the schedule end (17:00
       // Amsterdam = at most 16:00 UTC), which is always before UTC 23:59:59.
       const bookingWindowEnd = new Date();
-      bookingWindowEnd.setMonth(bookingWindowEnd.getMonth() + BOOKING_WINDOW_MONTHS);
+      bookingWindowEnd.setUTCMonth(bookingWindowEnd.getUTCMonth() + BOOKING_WINDOW_MONTHS);
       bookingWindowEnd.setUTCHours(23, 59, 59, 999);
       if (parsed > bookingWindowEnd) {
         errors.push({ field: 'datetime', message: `Appointment must be within ${BOOKING_WINDOW_MONTHS} months from today` });
@@ -188,7 +188,7 @@ export function createAppointmentRouter(): IRouter {
   router.get('/availability', availabilityRateLimit, async (_req: Request, res: Response) => {
     const from = new Date();
     const to = new Date();
-    to.setMonth(to.getMonth() + BOOKING_WINDOW_MONTHS);
+    to.setUTCMonth(to.getUTCMonth() + BOOKING_WINDOW_MONTHS);
     // Extend to end-of-UTC-day to match the booking window used in validateAppointmentBody,
     // ensuring every slot on the last eligible day is included in availability.
     to.setUTCHours(23, 59, 59, 999);

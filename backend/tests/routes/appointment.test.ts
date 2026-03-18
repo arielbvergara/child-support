@@ -97,10 +97,10 @@ describe('GET /appointments/availability', () => {
 
   it('getAvailability_ShouldReturnSlotsWithinBookingWindow_WhenCalendarIsNotConfigured', async () => {
     const res = await request(app).get('/appointments/availability');
-    // Use end-of-day two months from now: slots on the last eligible day are still valid
-    // Mirror the backend's boundary exactly: local setMonth + UTC end-of-day
+    // Use end-of-UTC-day two months from now: mirrors the backend's booking window boundary
+    // which uses UTC month arithmetic to stay consistent across all server timezones.
     const twoMonthsFromNow = new Date();
-    twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
+    twoMonthsFromNow.setUTCMonth(twoMonthsFromNow.getUTCMonth() + 2);
     twoMonthsFromNow.setUTCHours(23, 59, 59, 999);
 
     for (const slot of res.body.slots as Array<{ datetime: string }>) {
