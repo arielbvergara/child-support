@@ -13,12 +13,19 @@ import {
   WORKING_SCHEDULE,
   SLOT_DURATION_MINUTES,
 } from '../constants/appointment.constants';
-import { CONTACT_VALIDATION, HTTP_STATUS } from '../constants/contact.constants';
+import { HTTP_STATUS } from '../constants/contact.constants';
 import type {
   AppointmentRequestBody,
   ValidatedAppointmentPayload,
 } from '../types/appointment.types';
 import type { ValidationError } from '../types/contact.types';
+import {
+  extractStringField,
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateService,
+} from '../utils/validation';
 
 /**
  * Returns the local hour, minute, and day-of-week (0=Sun…6=Sat) for a Date
@@ -56,34 +63,17 @@ function validateAppointmentBody(body: AppointmentRequestBody): {
 } {
   const errors: ValidationError[] = [];
 
-  const name = typeof body.name === 'string' ? body.name.trim() : '';
-  const email = typeof body.email === 'string' ? body.email.trim() : '';
-  const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
-  const service = typeof body.service === 'string' ? body.service.trim() : '';
-  const notes = typeof body.notes === 'string' ? body.notes.trim() : '';
-  const datetime = typeof body.datetime === 'string' ? body.datetime.trim() : '';
+  const name = extractStringField(body.name);
+  const email = extractStringField(body.email);
+  const phone = extractStringField(body.phone);
+  const service = extractStringField(body.service);
+  const notes = extractStringField(body.notes);
+  const datetime = extractStringField(body.datetime);
 
-  if (!name) {
-    errors.push({ field: 'name', message: 'Name is required' });
-  } else if (name.length > CONTACT_VALIDATION.NAME_MAX_LENGTH) {
-    errors.push({ field: 'name', message: `Name must not exceed ${CONTACT_VALIDATION.NAME_MAX_LENGTH} characters` });
-  }
-
-  if (!email) {
-    errors.push({ field: 'email', message: 'Email is required' });
-  } else if (email.length > CONTACT_VALIDATION.EMAIL_MAX_LENGTH) {
-    errors.push({ field: 'email', message: 'Email address is too long' });
-  } else if (!CONTACT_VALIDATION.EMAIL_REGEX.test(email)) {
-    errors.push({ field: 'email', message: 'Email must be a valid email address' });
-  }
-
-  if (phone && phone.length > CONTACT_VALIDATION.PHONE_MAX_LENGTH) {
-    errors.push({ field: 'phone', message: `Phone number must not exceed ${CONTACT_VALIDATION.PHONE_MAX_LENGTH} characters` });
-  }
-
-  if (service && service.length > CONTACT_VALIDATION.SERVICE_MAX_LENGTH) {
-    errors.push({ field: 'service', message: `Service selection must not exceed ${CONTACT_VALIDATION.SERVICE_MAX_LENGTH} characters` });
-  }
+  validateName(name, errors);
+  validateEmail(email, errors);
+  validatePhone(phone, errors);
+  validateService(service, errors);
 
   if (notes && notes.length > APPOINTMENT_VALIDATION.NOTES_MAX_LENGTH) {
     errors.push({ field: 'notes', message: `Notes must not exceed ${APPOINTMENT_VALIDATION.NOTES_MAX_LENGTH} characters` });
@@ -146,27 +136,23 @@ function validateAppointmentBody(body: AppointmentRequestBody): {
 export function createAppointmentRouter(): IRouter {
   const router = Router();
 
+  const createAppointmentRateLimit = (max: number) =>
+    rateLimit({
+      windowMs: APPOINTMENT_RATE_LIMIT_WINDOW_MS,
+      max,
+      message: { error: 'Too many requests, please try again later.' },
+      standardHeaders: true,
+      legacyHeaders: false,
+      skip: () => process.env.NODE_ENV === 'test',
+    });
+
   // Rate limiter scoped to POST only — GET /availability must not be throttled
   // since it is called on every page load.
-  const bookingRateLimit = rateLimit({
-    windowMs: APPOINTMENT_RATE_LIMIT_WINDOW_MS,
-    max: APPOINTMENT_RATE_LIMIT_MAX,
-    message: { error: 'Too many requests, please try again later.' },
-    standardHeaders: true,
-    legacyHeaders: false,
-    skip: () => process.env.NODE_ENV === 'test',
-  });
+  const bookingRateLimit = createAppointmentRateLimit(APPOINTMENT_RATE_LIMIT_MAX);
 
   // Permissive limiter for the availability endpoint — protects against
   // abusive polling without impacting legitimate page-load traffic.
-  const availabilityRateLimit = rateLimit({
-    windowMs: APPOINTMENT_RATE_LIMIT_WINDOW_MS,
-    max: AVAILABILITY_RATE_LIMIT_MAX,
-    message: { error: 'Too many requests, please try again later.' },
-    standardHeaders: true,
-    legacyHeaders: false,
-    skip: () => process.env.NODE_ENV === 'test',
-  });
+  const availabilityRateLimit = createAppointmentRateLimit(AVAILABILITY_RATE_LIMIT_MAX);
 
   const calendarService =
     process.env.GOOGLE_CALENDAR_ID &&

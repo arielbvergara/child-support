@@ -8,6 +8,13 @@ import {
   HTTP_STATUS,
 } from '../constants/contact.constants';
 import type { ContactRequestBody, ValidatedContactPayload, ValidationError } from '../types/contact.types';
+import {
+  extractStringField,
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateService,
+} from '../utils/validation';
 
 function validateContactBody(body: ContactRequestBody): {
   payload: ValidatedContactPayload | null;
@@ -15,42 +22,16 @@ function validateContactBody(body: ContactRequestBody): {
 } {
   const errors: ValidationError[] = [];
 
-  const name = typeof body.name === 'string' ? body.name.trim() : '';
-  const email = typeof body.email === 'string' ? body.email.trim() : '';
-  const message = typeof body.message === 'string' ? body.message.trim() : '';
-  const phone = typeof body.phone === 'string' ? body.phone.trim() : '';
-  const service = typeof body.service === 'string' ? body.service.trim() : '';
+  const name = extractStringField(body.name);
+  const email = extractStringField(body.email);
+  const message = extractStringField(body.message);
+  const phone = extractStringField(body.phone);
+  const service = extractStringField(body.service);
 
-  if (!name) {
-    errors.push({ field: 'name', message: 'Name is required' });
-  } else if (name.length > CONTACT_VALIDATION.NAME_MAX_LENGTH) {
-    errors.push({
-      field: 'name',
-      message: `Name must not exceed ${CONTACT_VALIDATION.NAME_MAX_LENGTH} characters`,
-    });
-  }
-
-  if (!email) {
-    errors.push({ field: 'email', message: 'Email is required' });
-  } else if (email.length > CONTACT_VALIDATION.EMAIL_MAX_LENGTH) {
-    errors.push({ field: 'email', message: 'Email address is too long' });
-  } else if (!CONTACT_VALIDATION.EMAIL_REGEX.test(email)) {
-    errors.push({ field: 'email', message: 'Email must be a valid email address' });
-  }
-
-  if (phone && phone.length > CONTACT_VALIDATION.PHONE_MAX_LENGTH) {
-    errors.push({
-      field: 'phone',
-      message: `Phone number must not exceed ${CONTACT_VALIDATION.PHONE_MAX_LENGTH} characters`,
-    });
-  }
-
-  if (service && service.length > CONTACT_VALIDATION.SERVICE_MAX_LENGTH) {
-    errors.push({
-      field: 'service',
-      message: `Service selection must not exceed ${CONTACT_VALIDATION.SERVICE_MAX_LENGTH} characters`,
-    });
-  }
+  validateName(name, errors);
+  validateEmail(email, errors);
+  validatePhone(phone, errors);
+  validateService(service, errors);
 
   if (!message) {
     errors.push({ field: 'message', message: 'Message is required' });
