@@ -23,6 +23,31 @@ const personStubSchema = {
   worksFor: { '@id': `${SITE_CONFIG.siteUrl}/#business` },
 };
 
+const reviews = [
+  {
+    '@type': 'Review' as const,
+    author: { '@type': 'Person' as const, name: 'Marieke V.' },
+    reviewBody:
+      'Binnen 3 sessies veranderde de communicatie thuis compleet. We begrijpen onze dochter nu veel beter — minder conflicten, meer verbinding.',
+    reviewRating: {
+      '@type': 'Rating' as const,
+      ratingValue: '5',
+      bestRating: '5',
+    },
+  },
+  {
+    '@type': 'Review' as const,
+    author: { '@type': 'Person' as const, name: 'Thomas & Lena B.' },
+    reviewBody:
+      'De workshop over grenzen stellen was een keerpunt. In één middag kregen we eindelijk een aanpak die echt werkt met ons 6-jarige kind.',
+    reviewRating: {
+      '@type': 'Rating' as const,
+      ratingValue: '5',
+      bestRating: '5',
+    },
+  },
+];
+
 const professionalServiceSchema = {
   '@context': 'https://schema.org',
   '@type': ['ProfessionalService', 'LocalBusiness'],
@@ -108,6 +133,14 @@ const professionalServiceSchema = {
       },
     ],
   },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: `${reviews.length}`,
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: reviews,
 };
 
 interface MarketingLayoutProps {
