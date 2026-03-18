@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   return createMetadata('appointment', locale as Locale, {
     alternates: {
-      canonical: `/${locale}${appointmentPaths[locale as Locale]}`,
+      canonical: getLocalizedPath('/make-an-appointment', locale),
       languages: {
         nl: `/nl${appointmentPaths.nl}`,
         en: `/en${appointmentPaths.en}`,
