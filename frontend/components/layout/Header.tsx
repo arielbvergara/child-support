@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -29,6 +29,18 @@ export function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState('');
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const servicesDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isServicesOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(e.target as Node)) {
+        setIsServicesOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isServicesOpen]);
 
   useEffect(() => {
     function onScroll() {
@@ -84,10 +96,8 @@ export function Header({ locale }: HeaderProps) {
                 return (
                   <div
                     key={link.href}
-                    className="group relative"
-                    onMouseEnter={() => setIsServicesOpen(true)}
-                    onMouseLeave={() => setIsServicesOpen(false)}
-                    onFocusCapture={() => setIsServicesOpen(true)}
+                    ref={servicesDropdownRef}
+                    className="relative"
                     onBlurCapture={(e) => {
                       if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsServicesOpen(false);
                     }}
@@ -97,6 +107,7 @@ export function Header({ locale }: HeaderProps) {
                       aria-haspopup="menu"
                       aria-expanded={isServicesOpen}
                       aria-controls="services-desktop-menu"
+                      onClick={() => setIsServicesOpen((prev) => !prev)}
                       className={clsx(
                         'flex cursor-pointer items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                         isServicesActive
@@ -106,11 +117,11 @@ export function Header({ locale }: HeaderProps) {
                     >
                       {t(link.labelKey)}
                       <ChevronDown
-                        className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+                        className={clsx('h-3.5 w-3.5 transition-transform duration-200', isServicesOpen && 'rotate-180')}
                         aria-hidden="true"
                       />
                     </button>
-                    <div id="services-desktop-menu" role="menu" className="absolute left-0 top-full z-50 mt-1 hidden w-60 rounded-xl border border-border bg-surface py-2 shadow-lg group-hover:block group-focus-within:block">
+                    <div id="services-desktop-menu" role="menu" className={clsx('absolute left-0 top-full z-50 mt-1 w-60 rounded-xl border border-border bg-surface py-2 shadow-lg', isServicesOpen ? 'block' : 'hidden')}>
                       {SERVICE_CATALOG.map((service) => {
                         const serviceHref = `/${locale}/services/${service.slug}`;
                         const isServiceActive = pathname === serviceHref;
@@ -119,6 +130,7 @@ export function Header({ locale }: HeaderProps) {
                             key={service.slug}
                             href={serviceHref}
                             role="menuitem"
+                            onClick={() => setIsServicesOpen(false)}
                             className={clsx(
                               'block px-4 py-2.5 text-sm transition-colors',
                               isServiceActive
