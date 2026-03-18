@@ -21,7 +21,7 @@ export const LOCALIZED_PATHNAMES: Record<
 
 /**
  * Resolves an internal (file-system) path to the locale-specific external
- * slug.  Paths without a localised variant are returned unchanged.
+ * slug.  Paths without a localized variant are returned unchanged.
  */
 export function getLocalizedPath(path: string, locale: string): string {
   const variants =
