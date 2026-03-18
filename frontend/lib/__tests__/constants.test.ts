@@ -61,13 +61,36 @@ describe('PROFESSIONAL_INFO', () => {
     expect(PROFESSIONAL_INFO.name).toBe('');
   });
 
-  it('PROFESSIONAL_INFO_Should_HaveEmptyPhotoUrl_ByDefault', async () => {
+  it('PROFESSIONAL_INFO_Should_UseEnvVar_WhenNEXT_PUBLIC_PROFESSIONAL_PHOTO_URL_IsSet', async () => {
+    vi.stubEnv('NEXT_PUBLIC_PROFESSIONAL_PHOTO_URL', 'https://cdn.example.com/photo.jpg');
+    const { PROFESSIONAL_INFO } = await import('../constants');
+    expect(PROFESSIONAL_INFO.photoUrl).toBe('https://cdn.example.com/photo.jpg');
+  });
+
+  it('PROFESSIONAL_INFO_Should_HaveEmptyPhotoUrl_WhenEnvVarIsAbsent', async () => {
     const { PROFESSIONAL_INFO } = await import('../constants');
     expect(PROFESSIONAL_INFO.photoUrl).toBe('');
   });
 
-  it('PROFESSIONAL_INFO_Should_HaveEmptyLinkedIn_ByDefault', async () => {
+  it('PROFESSIONAL_INFO_Should_UseEnvVar_WhenNEXT_PUBLIC_PROFESSIONAL_LINKEDIN_IsSet', async () => {
+    vi.stubEnv('NEXT_PUBLIC_PROFESSIONAL_LINKEDIN', 'https://linkedin.com/in/anna-de-vries');
+    const { PROFESSIONAL_INFO } = await import('../constants');
+    expect(PROFESSIONAL_INFO.linkedIn).toBe('https://linkedin.com/in/anna-de-vries');
+  });
+
+  it('PROFESSIONAL_INFO_Should_HaveEmptyLinkedIn_WhenEnvVarIsAbsent', async () => {
     const { PROFESSIONAL_INFO } = await import('../constants');
     expect(PROFESSIONAL_INFO.linkedIn).toBe('');
+  });
+
+  it('PROFESSIONAL_INFO_Should_UseEnvVar_WhenNEXT_PUBLIC_PROFESSIONAL_BIG_REGISTER_IsSet', async () => {
+    vi.stubEnv('NEXT_PUBLIC_PROFESSIONAL_BIG_REGISTER', 'https://www.bigregister.nl/zorgverlener/123456789');
+    const { PROFESSIONAL_INFO } = await import('../constants');
+    expect(PROFESSIONAL_INFO.bigRegister).toBe('https://www.bigregister.nl/zorgverlener/123456789');
+  });
+
+  it('PROFESSIONAL_INFO_Should_HaveEmptyBigRegister_WhenEnvVarIsAbsent', async () => {
+    const { PROFESSIONAL_INFO } = await import('../constants');
+    expect(PROFESSIONAL_INFO.bigRegister).toBe('');
   });
 });
