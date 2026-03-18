@@ -58,7 +58,7 @@ export function ContactInfo() {
               <address className="not-italic text-base font-medium text-foreground">
                 {CONTACT_INFO.addressLine1}
                 <br />
-                {CONTACT_INFO.addressLine2}
+                {CONTACT_INFO.postalCode} {CONTACT_INFO.city}
               </address>
             </div>
           </li>

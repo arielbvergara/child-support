@@ -1,4 +1,4 @@
-import type { Service, NavLink, Testimonial, ContactInfo, Credential, ServicePageConfig } from './types';
+import type { Service, NavLink, Testimonial, ContactInfo, ProfessionalInfo, Credential, ServicePageConfig } from './types';
 
 export const SITE_CONFIG = {
   name: 'Pedagogisch Advies',
@@ -118,15 +118,22 @@ export const TRUST_STATS = [
 ];
 
 export const CONTACT_INFO: ContactInfo = {
-  addressLine1: 'Voorbeeldstraat 1',
-  addressLine2: '1234 AB Amsterdam',
-  phone: '+31 20 123 4567',
-  email: 'info@pedagogischadvies.nl',
+  addressLine1: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE_1 ?? '',
+  postalCode: process.env.NEXT_PUBLIC_BUSINESS_POSTAL_CODE ?? '',
+  city: process.env.NEXT_PUBLIC_BUSINESS_CITY ?? '',
+  phone: process.env.NEXT_PUBLIC_BUSINESS_PHONE ?? '',
+  email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL ?? '',
   hours: [
     { dayKey: 'contact.hours.weekdays', time: '09:00 – 17:00' },
     { dayKey: 'contact.hours.saturday', time: '10:00 – 14:00' },
     { dayKey: 'contact.hours.sunday', time: '—' },
   ],
+};
+
+export const PROFESSIONAL_INFO: ProfessionalInfo = {
+  name: process.env.NEXT_PUBLIC_PROFESSIONAL_NAME ?? '',
+  photoUrl: '', // populate when available
+  linkedIn: '', // populate when available
 };
 
 export const CREDENTIALS: Credential[] = [
