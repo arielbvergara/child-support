@@ -294,6 +294,12 @@
       "nextMonth": "Volgende maand"
     }
   },
+  "servicesPage": {
+    "pageTitle": "Diensten",
+    "pageSubtitle": "Persoonlijke pedagogische begeleiding afgestemd op de behoeften van uw kind en gezin.",
+    "intro": "Elk kind en elk gezin is uniek. Daarom bied ik verschillende vormen van begeleiding aan — van persoonlijke consulten tot groepsworkshops en professionele kindbeoordelingen. Ontdek hieronder welke dienst het beste bij uw situatie past.",
+    "exploreService": "Meer informatie"
+  },
   "servicePage": {
     "individual": {
       "tagline": "Persoonlijke begeleiding afgestemd op uw gezinssituatie",

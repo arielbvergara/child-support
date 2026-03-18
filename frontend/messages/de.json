@@ -294,6 +294,12 @@
       "nextMonth": "Nächster Monat"
     }
   },
+  "servicesPage": {
+    "pageTitle": "Leistungen",
+    "pageSubtitle": "Maßgeschneiderte pädagogische Unterstützung, abgestimmt auf die einzigartigen Bedürfnisse Ihres Kindes und Ihrer Familie.",
+    "intro": "Jedes Kind und jede Familie ist einzigartig. Deshalb biete ich verschiedene Formen der Begleitung an — von persönlichen Beratungen über Gruppenworkshops bis hin zu professionellen Kinderbeurteilungen. Entdecken Sie unten, welcher Service am besten zu Ihrer Situation passt.",
+    "exploreService": "Mehr erfahren"
+  },
   "servicePage": {
     "individual": {
       "tagline": "Persönliche Begleitung, abgestimmt auf Ihre Familiensituation",

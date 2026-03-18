@@ -9,6 +9,7 @@ const serviceEntries = SERVICE_PAGES.map((service) => ({
 
 const INDEXABLE_PAGES = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' as const },
+  { path: '/services', priority: 0.9, changeFrequency: 'monthly' as const },
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' as const },
   { path: '/make-an-appointment', priority: 0.7, changeFrequency: 'monthly' as const },

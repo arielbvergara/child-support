@@ -28,6 +28,11 @@ const PAGE_TITLES: Record<string, Record<Locale, string>> = {
     en: 'Terms of Service',
     de: 'Nutzungsbedingungen',
   },
+  services: {
+    nl: 'Diensten — Kind- en Gezinsbegeleiding',
+    en: 'Services — Child & Family Development Support',
+    de: 'Leistungen — Kinder- und Familienbegleitung',
+  },
   appointment: {
     nl: 'Maak een afspraak — Pedagoog',
     en: 'Make an Appointment — Pedagogy Professional',
@@ -80,6 +85,11 @@ const PAGE_DESCRIPTIONS: Record<string, Record<Locale, string>> = {
     nl: 'Lees onze algemene voorwaarden voor het gebruik van onze diensten.',
     en: 'Read the terms and conditions for using our child development support services.',
     de: 'Lesen Sie die Nutzungsbedingungen für unsere pädagogischen Beratungsleistungen.',
+  },
+  services: {
+    nl: 'Overzicht van pedagogische diensten: individuele consulten, groepsworkshops, kindbeoordelingen en ondersteuning voor scholen.',
+    en: 'Overview of pedagogical services: individual consultations, group workshops, child assessments, and school support.',
+    de: 'Übersicht pädagogischer Leistungen: Einzelberatungen, Gruppenworkshops, Kinderbeurteilungen und Schulunterstützung.',
   },
   appointment: {
     nl: 'Maak eenvoudig een afspraak online. Kies een datum en tijdstip dat u uitkomt.',

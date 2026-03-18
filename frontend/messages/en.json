@@ -294,6 +294,12 @@
       "nextMonth": "Next month"
     }
   },
+  "servicesPage": {
+    "pageTitle": "Services",
+    "pageSubtitle": "Tailored pedagogical support designed around the unique needs of your child and family.",
+    "intro": "Every child and family is unique. That's why I offer a range of support options — from one-on-one consultations to group workshops and professional child assessments. Explore the services below to find the right fit for your situation.",
+    "exploreService": "Learn more"
+  },
   "servicePage": {
     "individual": {
       "tagline": "One-on-one support tailored to your family's unique needs",
