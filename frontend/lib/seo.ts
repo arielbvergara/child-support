@@ -11,6 +11,8 @@ export function buildPersonSchema(
   locale: string,
   info: ProfessionalInfo = PROFESSIONAL_INFO,
 ) {
+  const sameAsLinks = [info.linkedIn, info.bigRegister].filter(Boolean);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -24,7 +26,7 @@ export function buildPersonSchema(
     worksFor: {
       '@id': `${SITE_CONFIG.siteUrl}/#business`,
     },
-    ...(info.linkedIn ? { sameAs: [info.linkedIn] } : {}),
+    ...(sameAsLinks.length > 0 ? { sameAs: sameAsLinks } : {}),
     knowsLanguage: ['nl', 'en', 'de'],
     hasCredential: [
       {

@@ -2,6 +2,7 @@ import { useTranslations } from 'next-intl';
 import { GraduationCap } from 'lucide-react';
 import { Heading } from '@/components/ui/Heading';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
+import { PROFESSIONAL_INFO } from '@/lib/constants';
 
 export function BiographySection() {
   const t = useTranslations('about.biography');
@@ -26,9 +27,14 @@ export function BiographySection() {
 
         {/* Bio content */}
         <div className="md:col-span-3">
-          <Heading level={2} className="mb-6">
+          <Heading level={2} className="mb-2">
             {t('title')}
           </Heading>
+          {PROFESSIONAL_INFO.name && (
+            <p className="mb-6 text-base font-semibold text-warm-900">
+              {PROFESSIONAL_INFO.name}
+            </p>
+          )}
 
           <p className="mb-5 text-base leading-relaxed text-warm-700">
             {t('paragraph1')}

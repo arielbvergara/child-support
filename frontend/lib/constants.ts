@@ -132,8 +132,9 @@ export const CONTACT_INFO: ContactInfo = {
 
 export const PROFESSIONAL_INFO: ProfessionalInfo = {
   name: process.env.NEXT_PUBLIC_PROFESSIONAL_NAME ?? '',
-  photoUrl: '', // populate when available
-  linkedIn: '', // populate when available
+  photoUrl: process.env.NEXT_PUBLIC_PROFESSIONAL_PHOTO_URL ?? '',
+  linkedIn: process.env.NEXT_PUBLIC_PROFESSIONAL_LINKEDIN ?? '',
+  bigRegister: process.env.NEXT_PUBLIC_PROFESSIONAL_BIG_REGISTER ?? '',
 };
 
 export const CREDENTIALS: Credential[] = [

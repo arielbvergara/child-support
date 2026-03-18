@@ -34,6 +34,7 @@ export interface ProfessionalInfo {
   readonly name: string;
   readonly photoUrl: string;
   readonly linkedIn: string;
+  readonly bigRegister: string;
 }
 
 export interface ContactInfo {

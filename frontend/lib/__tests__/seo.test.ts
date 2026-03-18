@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { buildPersonSchema } from '@/lib/seo';
 
-const BASE_INFO = { name: 'Dr. Anna de Vries', photoUrl: '', linkedIn: '' };
+const BASE_INFO = { name: 'Dr. Anna de Vries', photoUrl: '', linkedIn: '', bigRegister: '' };
 
 describe('buildPersonSchema', () => {
   it('buildPersonSchema_Should_UseProvidedName_WhenInfoArgumentIsPassed', () => {
@@ -31,6 +31,31 @@ describe('buildPersonSchema', () => {
   });
 
   it('buildPersonSchema_Should_OmitSameAs_WhenLinkedInIsEmpty', () => {
+    const schema = buildPersonSchema('nl', BASE_INFO) as Record<string, unknown>;
+    expect(schema).not.toHaveProperty('sameAs');
+  });
+
+  it('buildPersonSchema_Should_IncludeBigRegisterInSameAs_WhenBigRegisterIsNonEmpty', () => {
+    const schema = buildPersonSchema('nl', {
+      ...BASE_INFO,
+      bigRegister: 'https://www.bigregister.nl/zorgverlener/123456789',
+    }) as Record<string, unknown>;
+    expect(schema.sameAs).toEqual(['https://www.bigregister.nl/zorgverlener/123456789']);
+  });
+
+  it('buildPersonSchema_Should_IncludeBothLinkedInAndBigRegister_WhenBothAreNonEmpty', () => {
+    const schema = buildPersonSchema('nl', {
+      ...BASE_INFO,
+      linkedIn: 'https://linkedin.com/in/anna-de-vries',
+      bigRegister: 'https://www.bigregister.nl/zorgverlener/123456789',
+    }) as Record<string, unknown>;
+    expect(schema.sameAs).toEqual([
+      'https://linkedin.com/in/anna-de-vries',
+      'https://www.bigregister.nl/zorgverlener/123456789',
+    ]);
+  });
+
+  it('buildPersonSchema_Should_OmitSameAs_WhenBothLinkedInAndBigRegisterAreEmpty', () => {
     const schema = buildPersonSchema('nl', BASE_INFO) as Record<string, unknown>;
     expect(schema).not.toHaveProperty('sameAs');
   });
