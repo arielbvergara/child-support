@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Menu, Globe, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { LogoIcon } from '@/components/ui/LogoIcon';
 import { MobileMenu } from './MobileMenu';
@@ -16,10 +16,10 @@ interface HeaderProps {
   locale: string;
 }
 
-const localeLabels: Record<string, string> = {
-  nl: 'NL',
-  en: 'EN',
-  de: 'DE',
+const LOCALE_OPTIONS: Record<string, { flag: string; label: string }> = {
+  nl: { flag: '🇳🇱', label: 'Nederlands' },
+  en: { flag: '🇬🇧', label: 'English' },
+  de: { flag: '🇩🇪', label: 'Deutsch' },
 };
 
 export function Header({ locale }: HeaderProps) {
@@ -29,7 +29,9 @@ export function Header({ locale }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHash, setCurrentHash] = useState('');
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isLocaleOpen, setIsLocaleOpen] = useState(false);
   const servicesDropdownRef = useRef<HTMLDivElement>(null);
+  const localeDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isServicesOpen) return;
@@ -41,6 +43,17 @@ export function Header({ locale }: HeaderProps) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isServicesOpen]);
+
+  useEffect(() => {
+    if (!isLocaleOpen) return;
+    function handleClickOutside(e: MouseEvent) {
+      if (localeDropdownRef.current && !localeDropdownRef.current.contains(e.target as Node)) {
+        setIsLocaleOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isLocaleOpen]);
 
   useEffect(() => {
     function onScroll() {
@@ -186,24 +199,55 @@ export function Header({ locale }: HeaderProps) {
           {/* Right side: language switcher + CTA */}
           <div className="flex items-center gap-2">
             {/* Language switcher */}
-            <div className="relative hidden md:flex md:items-center md:gap-1">
-              <Globe className="h-4 w-4 text-warm-500" aria-hidden="true" />
-              {SITE_CONFIG.locales.map((loc) => (
-                <Link
-                  key={loc}
-                  href={`/${loc}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`}
-                  className={clsx(
-                    'rounded px-1.5 py-0.5 text-xs font-semibold transition-colors',
-                    loc === locale
-                      ? 'text-primary'
-                      : 'text-warm-500 hover:text-foreground'
-                  )}
-                  aria-label={`Switch to ${loc.toUpperCase()}`}
-                  aria-current={loc === locale ? 'true' : undefined}
-                >
-                  {localeLabels[loc]}
-                </Link>
-              ))}
+            <div
+              ref={localeDropdownRef}
+              className="relative hidden md:block"
+              onBlurCapture={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsLocaleOpen(false);
+              }}
+            >
+              <button
+                type="button"
+                aria-haspopup="listbox"
+                aria-expanded={isLocaleOpen}
+                aria-label="Select language"
+                onClick={() => setIsLocaleOpen((prev) => !prev)}
+                className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-warm-700 transition-colors hover:bg-primary-light/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <span aria-hidden="true">{LOCALE_OPTIONS[locale]?.flag}</span>
+                <span>{LOCALE_OPTIONS[locale]?.label}</span>
+                <ChevronDown
+                  className={clsx('h-3.5 w-3.5 transition-transform duration-200', isLocaleOpen && 'rotate-180')}
+                  aria-hidden="true"
+                />
+              </button>
+              <div
+                role="listbox"
+                aria-label="Language"
+                className={clsx(
+                  'absolute right-0 top-full z-50 mt-1 w-44 rounded-xl border border-border bg-surface py-2 shadow-lg',
+                  isLocaleOpen ? 'block' : 'hidden'
+                )}
+              >
+                {SITE_CONFIG.locales.map((loc) => (
+                  <Link
+                    key={loc}
+                    href={`/${loc}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`}
+                    role="option"
+                    aria-selected={loc === locale}
+                    onClick={() => setIsLocaleOpen(false)}
+                    className={clsx(
+                      'flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors',
+                      loc === locale
+                        ? 'bg-primary-light font-semibold text-primary'
+                        : 'text-warm-700 hover:bg-primary-light hover:text-primary'
+                    )}
+                  >
+                    <span aria-hidden="true">{LOCALE_OPTIONS[loc]?.flag}</span>
+                    <span>{LOCALE_OPTIONS[loc]?.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <Button
