@@ -5,7 +5,10 @@
     "about": "About",
     "contact": "Contact",
     "bookConsultation": "Make an Appointment",
-    "mobileMenuLabel": "Navigation menu"
+    "mobileMenuLabel": "Navigation menu",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "selectLanguage": "Select language"
   },
   "hero": {
     "headline": "Nurturing Growth, One Family at a Time",

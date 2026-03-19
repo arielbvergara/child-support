@@ -5,7 +5,10 @@
     "about": "Über mich",
     "contact": "Kontakt",
     "bookConsultation": "Termin vereinbaren",
-    "mobileMenuLabel": "Navigationsmenü"
+    "mobileMenuLabel": "Navigationsmenü",
+    "closeMenu": "Menü schließen",
+    "openMenu": "Menü öffnen",
+    "selectLanguage": "Sprache auswählen"
   },
   "hero": {
     "headline": "Wachstum begleiten, eine Familie nach der anderen",

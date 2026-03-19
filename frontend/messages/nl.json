@@ -5,7 +5,10 @@
     "about": "Over mij",
     "contact": "Contact",
     "bookConsultation": "Maak een afspraak",
-    "mobileMenuLabel": "Navigatiemenu"
+    "mobileMenuLabel": "Navigatiemenu",
+    "closeMenu": "Menu sluiten",
+    "openMenu": "Menu openen",
+    "selectLanguage": "Taal selecteren"
   },
   "hero": {
     "headline": "Groei begeleiden, één gezin tegelijk",

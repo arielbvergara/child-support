@@ -249,7 +249,7 @@ export function AppointmentForm() {
   if (submitted && selectedDatetime) {
     return (
       <>
-        {/* Persistent live region — announces success to screen readers */}
+        {/* Inline live region — rendered alongside success content to announce it to screen readers */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
           {t('successTitle')}
         </div>

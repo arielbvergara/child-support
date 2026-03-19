@@ -248,7 +248,7 @@ export function Header({ locale }: HeaderProps) {
                 aria-haspopup="menu"
                 aria-expanded={isLocaleOpen}
                 aria-controls="locale-desktop-menu"
-                aria-label="Select language"
+                aria-label={t('nav.selectLanguage')}
                 onClick={() => setIsLocaleOpen((prev) => !prev)}
                 className="flex cursor-pointer items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-warm-700 transition-colors hover:bg-primary-light/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
@@ -311,7 +311,7 @@ export function Header({ locale }: HeaderProps) {
             <button
               ref={hamburgerButtonRef}
               onClick={() => setIsMenuOpen(true)}
-              aria-label="Open menu"
+              aria-label={t('nav.openMenu')}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               type="button"
