@@ -4,7 +4,8 @@
     "services": "Diensten",
     "about": "Over mij",
     "contact": "Contact",
-    "bookConsultation": "Maak een afspraak"
+    "bookConsultation": "Maak een afspraak",
+    "mobileMenuLabel": "Navigatiemenu"
   },
   "hero": {
     "headline": "Groei begeleiden, één gezin tegelijk",

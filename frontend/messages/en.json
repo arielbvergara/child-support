@@ -4,7 +4,8 @@
     "services": "Services",
     "about": "About",
     "contact": "Contact",
-    "bookConsultation": "Make an Appointment"
+    "bookConsultation": "Make an Appointment",
+    "mobileMenuLabel": "Navigation menu"
   },
   "hero": {
     "headline": "Nurturing Growth, One Family at a Time",

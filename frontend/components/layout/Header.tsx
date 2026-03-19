@@ -34,6 +34,7 @@ export function Header({ locale }: HeaderProps) {
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const localeDropdownRef = useRef<HTMLDivElement>(null);
   const localeButtonRef = useRef<HTMLButtonElement>(null);
+  const hamburgerButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!isServicesOpen) return;
@@ -77,6 +78,23 @@ export function Header({ locale }: HeaderProps) {
     window.addEventListener('hashchange', updateHash);
     return () => window.removeEventListener('hashchange', updateHash);
   }, [pathname]);
+
+  // Inert background content while mobile menu is open (focus trap support)
+  useEffect(() => {
+    const main = document.getElementById('main-content');
+    const footer = document.querySelector('footer');
+    if (isMenuOpen) {
+      main?.setAttribute('inert', '');
+      footer?.setAttribute('inert', '');
+    } else {
+      main?.removeAttribute('inert');
+      footer?.removeAttribute('inert');
+    }
+    return () => {
+      main?.removeAttribute('inert');
+      footer?.removeAttribute('inert');
+    };
+  }, [isMenuOpen]);
 
   // Get current page path without locale prefix for switching
   const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
@@ -286,10 +304,12 @@ export function Header({ locale }: HeaderProps) {
 
             {/* Mobile hamburger */}
             <button
+              ref={hamburgerButtonRef}
               onClick={() => setIsMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
+              type="button"
               className="flex h-10 w-10 items-center justify-center rounded-lg text-warm-700 transition-colors hover:bg-warm-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:hidden"
             >
               <Menu className="h-5 w-5" />
@@ -302,6 +322,7 @@ export function Header({ locale }: HeaderProps) {
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         locale={locale}
+        triggerRef={hamburgerButtonRef}
       />
     </>
   );

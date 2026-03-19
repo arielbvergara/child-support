@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
@@ -14,12 +14,14 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   locale: string;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, locale, triggerRef }: MobileMenuProps) {
   const t = useTranslations();
   const pathname = usePathname();
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   // Close on ESC key
   useEffect(() => {
@@ -29,6 +31,17 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
     if (isOpen) document.addEventListener('keydown', handleKey);
     return () => document.removeEventListener('keydown', handleKey);
   }, [isOpen, onClose]);
+
+  // Focus management: move focus into dialog on open, restore to trigger on close
+  useEffect(() => {
+    if (isOpen) {
+      requestAnimationFrame(() => {
+        closeButtonRef.current?.focus();
+      });
+    } else {
+      triggerRef.current?.focus();
+    }
+  }, [isOpen, triggerRef]);
 
   // Prevent body scroll while open
   useEffect(() => {
@@ -55,9 +68,10 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
           {/* Drawer */}
           <motion.div
             key="drawer"
+            id="mobile-menu"
             role="dialog"
             aria-modal="true"
-            aria-label={t('nav.home')}
+            aria-label={t('nav.mobileMenuLabel')}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -70,6 +84,8 @@ export function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps) {
                 Menu
               </span>
               <button
+                ref={closeButtonRef}
+                type="button"
                 onClick={onClose}
                 aria-label="Close menu"
                 className="flex h-10 w-10 items-center justify-center rounded-lg text-warm-600 transition-colors hover:bg-warm-100 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"

@@ -4,7 +4,8 @@
     "services": "Leistungen",
     "about": "Über mich",
     "contact": "Kontakt",
-    "bookConsultation": "Termin vereinbaren"
+    "bookConsultation": "Termin vereinbaren",
+    "mobileMenuLabel": "Navigationsmenü"
   },
   "hero": {
     "headline": "Wachstum begleiten, eine Familie nach der anderen",
