@@ -22,6 +22,7 @@ export function MobileMenu({ isOpen, onClose, locale, triggerRef }: MobileMenuPr
   const pathname = usePathname();
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const didOpenRef = useRef(false);
 
   // Close on ESC key
   useEffect(() => {
@@ -32,13 +33,16 @@ export function MobileMenu({ isOpen, onClose, locale, triggerRef }: MobileMenuPr
     return () => document.removeEventListener('keydown', handleKey);
   }, [isOpen, onClose]);
 
-  // Focus management: move focus into dialog on open, restore to trigger on close
+  // Focus management: move focus into dialog on open, restore to trigger on close.
+  // didOpenRef guards against calling triggerRef.focus() on the initial render
+  // when isOpen is already false (which would steal focus from the page).
   useEffect(() => {
     if (isOpen) {
+      didOpenRef.current = true;
       requestAnimationFrame(() => {
         closeButtonRef.current?.focus();
       });
-    } else {
+    } else if (didOpenRef.current) {
       triggerRef.current?.focus();
     }
   }, [isOpen, triggerRef]);
@@ -87,7 +91,7 @@ export function MobileMenu({ isOpen, onClose, locale, triggerRef }: MobileMenuPr
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                aria-label="Close menu"
+                aria-label={t('nav.closeMenu')}
                 className="flex h-10 w-10 items-center justify-center rounded-lg text-warm-600 transition-colors hover:bg-warm-100 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <X className="h-5 w-5" />
